@@ -274,7 +274,7 @@ footer { border-top: 1px solid var(--rule); padding-top: 18px; display: grid; ga
     const ul = el("ul", "findings");
     for (const f of r.findings.slice(0, 25)) {
       const li = el("li", f.severity);
-      li.append(el("span", "sev", f.severity), el("span", "f-msg", (LABEL[f.check] || f.check) + ": " + f.message));
+      li.append(el("span", "sev", f.severity), el("span", "f-msg", f.message));
       li.append(el("span", "f-ev", f.evidence));
       const where = f.location === "text" ? "Visible page text" : f.location === "attribute" ? "Attribute " + (f.attribute || "") + " (often not visible: alt text, tooltip, screen-reader label)" : f.location === "script" ? "Inside a script (may not be shown)" : "Page setting";
       li.append(el("span", "f-where", where));
