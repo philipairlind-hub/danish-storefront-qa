@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Danish Storefront QA</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Free scan for leftover English and Swedish text on your Danish webshop, plus fixed-price native Danish review.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Public+Sans:ital,wght@0,400;0,600;1,400&family=Kalam:wght@400;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one proofread sheet — a narrow reading column with the scan tool as the working surface, corrections drawn in red pen. */
+:root {
+  --paper: #f6f7f4;
+  --sheet: #ffffff;
+  --ink: #172033;
+  --ink-soft: #4a5468;
+  --rule: #d9ddd6;
+  --pen: #c8102e;
+  --pen-soft: #fbe8eb;
+  --ok: #1f6b4a;
+  --warn: #9a5b00;
+  --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --body: "Public Sans", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --hand: "Kalam", "Comic Neue", "Segoe Print", cursive;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0f1522; --sheet: #161e2e; --ink: #e9ecf2; --ink-soft: #a7b0c2; --rule: #2a3447;
+    --pen: #ff6b7d; --pen-soft: #3a1c26; --ok: #6fd3a2; --warn: #f0b45a; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0f1522; --sheet: #161e2e; --ink: #e9ecf2; --ink-soft: #a7b0c2; --rule: #2a3447;
+  --pen: #ff6b7d; --pen-soft: #3a1c26; --ok: #6fd3a2; --warn: #f0b45a; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 980px; margin: 0 auto; padding-block: 28px 64px; display: grid; gap: 56px; }
+a { color: var(--ink); text-decoration-color: var(--pen); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible { outline: 3px solid var(--pen); outline-offset: 2px; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; line-height: 1.12; letter-spacing: -0.01em; }
+h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
+h3 { font-size: 1.15rem; }
+p { margin: 0; max-width: 65ch; }
+.eyebrow { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); }
+
+header.top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.wordmark { font-family: var(--display); font-weight: 700; font-size: 1.1rem; }
+.wordmark span { color: var(--pen); }
+
+/* hero: the proofread line */
+.hero { display: grid; gap: 22px; }
+.markup { font-family: var(--display); font-weight: 500; font-size: clamp(1.6rem, 5vw, 2.6rem); line-height: 1.9; }
+.fix { position: relative; white-space: nowrap; }
+.fix s { text-decoration-color: var(--pen); text-decoration-thickness: 3px; color: var(--ink-soft); }
+.fix b { position: absolute; left: 0; top: -1.05em; font-family: var(--hand); font-weight: 700; color: var(--pen); font-size: 0.78em; white-space: nowrap; transform: rotate(-3deg); }
+.hero h1 { font-size: clamp(1.9rem, 4.6vw, 3rem); max-width: 22ch; }
+.hero p.lede { font-size: 1.125rem; color: var(--ink-soft); }
+
+/* scanner */
+.scanner { background: var(--sheet); border: 1px solid var(--rule); border-radius: 6px; padding: 22px; display: grid; gap: 14px; }
+.scanner form { display: flex; gap: 10px; flex-wrap: wrap; }
+.scanner label { font-weight: 600; }
+.scanner input[type="url"], .scanner input[type="text"] {
+  flex: 1 1 280px; min-width: 0; font: inherit; padding: 12px 14px; border: 1px solid var(--rule); border-radius: 4px;
+  background: var(--paper); color: var(--ink);
+}
+button.primary { font: inherit; font-weight: 600; padding: 12px 20px; border-radius: 4px; border: 0; background: var(--ink); color: var(--paper); cursor: pointer; }
+button.primary:disabled { opacity: 0.55; cursor: progress; }
+.fine { font-size: 0.85rem; color: var(--ink-soft); }
+.status { font-size: 0.95rem; }
+.status.error { color: var(--pen); }
+
+.result { display: grid; gap: 14px; border-top: 1px dashed var(--rule); padding-top: 16px; }
+.result-head { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: baseline; }
+.result-head .url { font-family: var(--mono); font-size: 0.85rem; word-break: break-all; }
+.tag { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 8px; border-radius: 99px; border: 1px solid var(--rule); color: var(--ink-soft); }
+.tag.example { border-color: var(--warn); color: var(--warn); }
+.counts { display: flex; flex-wrap: wrap; gap: 8px; }
+.count { font-variant-numeric: tabular-nums; font-size: 0.9rem; padding: 4px 10px; border-radius: 4px; background: var(--paper); border: 1px solid var(--rule); }
+.count strong { font-family: var(--display); font-size: 1.05rem; margin-right: 4px; }
+.count.hot { border-color: var(--pen); background: var(--pen-soft); }
+ul.findings { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+ul.findings li { display: grid; grid-template-columns: 74px 1fr; gap: 4px 12px; padding: 10px 12px; border-radius: 4px; background: var(--paper); border-left: 3px solid var(--rule); }
+ul.findings li.high { border-left-color: var(--pen); }
+ul.findings li.medium { border-left-color: var(--warn); }
+.sev { font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-soft); padding-top: 3px; }
+.f-msg { font-weight: 600; min-width: 0; }
+.f-ev { grid-column: 2; font-family: var(--mono); font-size: 0.85rem; overflow-wrap: anywhere; min-width: 0; }
+.f-where { grid-column: 2; font-size: 0.8rem; color: var(--ink-soft); }
+.f-fix { grid-column: 2; font-family: var(--hand); color: var(--pen); font-size: 1.1rem; }
+.note { font-size: 0.85rem; color: var(--ink-soft); }
+
+/* two-column split */
+.split { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px; }
+.split ul { margin: 10px 0 0; padding-left: 1.1em; display: grid; gap: 6px; }
+
+/* packages */
+.packages { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; align-items: start; }
+.pkg { background: var(--sheet); border: 1px solid var(--rule); border-radius: 6px; padding: 20px; display: grid; gap: 10px; }
+.pkg.featured { border-color: var(--ink); }
+.price { font-family: var(--display); font-weight: 700; font-size: 2rem; font-variant-numeric: tabular-nums; }
+.price small { font-family: var(--body); font-weight: 400; font-size: 0.9rem; color: var(--ink-soft); }
+.pkg ul { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; font-size: 0.95rem; }
+.cta { display: inline-block; font-weight: 600; padding: 11px 18px; border-radius: 4px; background: var(--pen); color: #fff; text-decoration: none; justify-self: start; }
+.cta.secondary { background: transparent; color: var(--ink); border: 1px solid var(--ink); }
+
+ol.steps { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; counter-reset: s; }
+ol.steps li { counter-increment: s; display: grid; gap: 6px; }
+ol.steps li::before { content: counter(s); font-family: var(--hand); font-weight: 700; color: var(--pen); font-size: 1.8rem; line-height: 1; }
+
+details { border-top: 1px solid var(--rule); padding-block: 12px; }
+details summary { cursor: pointer; font-weight: 600; }
+details p { margin-top: 8px; color: var(--ink-soft); }
+
+footer { border-top: 1px solid var(--rule); padding-top: 18px; display: grid; gap: 6px; font-size: 0.85rem; color: var(--ink-soft); }
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <header class="top">
+    <div class="wordmark">Danish <span>Storefront</span> QA</div>
+    <div class="eyebrow">Native Danish review · Aarhus, Denmark</div>
+  </header>
+
+  <section class="hero" aria-labelledby="hero-title">
+    <p class="markup" aria-label="Example correction: Lägg i varukorg corrected to Læg i kurv, Sign up corrected to Tilmeld">
+      <span class="fix"><b>Læg i kurv</b><s>Lägg i varukorg</s></span> · <span class="fix"><b>Tilmeld</b><s>Sign up</s></span>
+    </p>
+    <h1 id="hero-title">Your Danish store was translated by AI. Has a Dane read it?</h1>
+    <p class="lede">Scan one page of your Danish webshop for leftover English and Swedish text, untranslated theme keys and price-format slips. Then let a native Danish speaker fix what a scanner can't hear.</p>
+  </section>
+
+  <section class="scanner" aria-labelledby="scan-title">
+    <h2 id="scan-title">Free page scan</h2>
+    <form id="scan-form" novalidate>
+      <label for="scan-url" class="visually-hidden" style="position:absolute;left:-9999px">Danish page URL</label>
+      <input id="scan-url" name="url" type="text" inputmode="url" autocomplete="url" placeholder="yourshop.com/da-dk" required>
+      <button id="scan-btn" class="primary" type="submit">Scan page</button>
+    </form>
+    <p class="fine" id="scan-fine">One public page, fetched once from a server in Sweden. Shops that change content by visitor country may look different to your customers. Up to 10 scans per hour.</p>
+    <p class="status" id="scan-status" role="status" aria-live="polite"></p>
+    <div class="result" id="scan-result"></div>
+  </section>
+
+  <section class="split" aria-label="What the scan covers">
+    <div>
+      <h3>What the scan flags</h3>
+      <ul>
+        <li>Shopify and app keys shown as <code>Translation missing: da…</code></li>
+        <li>English buttons and labels: <em>Add to cart</em>, <em>Sign up</em>, <em>Search</em></li>
+        <li>Swedish leftovers: <em>Sök</em>, <em>Köpvillkor</em>, a Swedish slogan</li>
+        <li>Prices in EUR or SEK, and <em>199.95 kr</em> instead of <em>199,95 kr.</em></li>
+        <li>A page that tells browsers and Google it is not Danish</li>
+      </ul>
+    </div>
+    <div>
+      <h3>What it can't judge</h3>
+      <ul>
+        <li>Whether the Danish reads naturally or sounds machine-made</li>
+        <li>Compound-word errors (særskrivning) and du/De tone</li>
+        <li>Your checkout flow, emails and anything behind a login</li>
+        <li>Text that your shop builds with JavaScript after loading</li>
+      </ul>
+      <p class="note" style="margin-top:10px">That part is the native review below.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="pkg-title" style="display:grid;gap:18px">
+    <h2 id="pkg-title">Native review, fixed price</h2>
+    <div class="packages">
+      <article class="pkg">
+        <div class="eyebrow">Entry</div>
+        <div class="price">USD 95</div>
+        <ul>
+          <li>Up to 1,500 words: home, a product page, cart, one email</li>
+          <li>Machine scan + native read-through</li>
+          <li>Issue log and corrected text you can paste in</li>
+          <li>3 days · 1 revision round</li>
+        </ul>
+        <a class="cta" href="https://www.upwork.com/freelancers/~0126d96b2959a13a98" target="_blank" rel="noopener">Order on Upwork</a>
+      </article>
+      <article class="pkg featured">
+        <div class="eyebrow">Core</div>
+        <div class="price">USD 350</div>
+        <ul>
+          <li>Up to 5,000 words</li>
+          <li>One purchase flow tested on desktop and mobile as a Danish customer, in your test mode</li>
+          <li>Screenshots of flow issues and a one-page priority summary</li>
+          <li>5 days · 1 revision round</li>
+        </ul>
+        <a class="cta" href="https://www.upwork.com/freelancers/~0126d96b2959a13a98" target="_blank" rel="noopener">Order on Upwork</a>
+      </article>
+      <article class="pkg">
+        <div class="eyebrow">Recurring</div>
+        <div class="price">USD 300 <small>/ month</small></div>
+        <ul>
+          <li>Up to 4,000 new or changed words a month: ads, emails, new products</li>
+          <li>Weekly re-scan of up to 50 pages</li>
+          <li>48-hour turnaround per batch</li>
+          <li>Available after a completed Core review</li>
+        </ul>
+        <a class="cta secondary" href="https://www.upwork.com/freelancers/~0126d96b2959a13a98" target="_blank" rel="noopener">Ask on Upwork</a>
+      </article>
+    </div>
+    <p class="note">Payment runs through Upwork's escrow: the milestone is funded before work starts. Written communication only, no calls needed.</p>
+  </section>
+
+  <section aria-labelledby="how-title" style="display:grid;gap:18px">
+    <h2 id="how-title">How an order runs</h2>
+    <ol class="steps">
+      <li><h3>Send the brief</h3><p>Links or files, your target customer, tone (du or De), any term list, and whether AI tools may be used on your material.</p></li>
+      <li><h3>Fund the milestone</h3><p>Fixed price on Upwork. Work starts when the milestone is funded.</p></li>
+      <li><h3>Get the issue log</h3><p>Page, original text, problem, fix and severity for every finding, plus the corrected text.</p></li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="faq-title" style="display:grid;gap:6px">
+    <h2 id="faq-title" style="margin-bottom:8px">Questions</h2>
+    <details><summary>We can ask ChatGPT to check it. Why pay?</summary><p>You can, and it will catch some errors. It will miss whether the text sounds like a Danish shop. That needs a native reader who answers for the result.</p></details>
+    <details><summary>Do you translate from scratch?</summary><p>No. This is review and correction of Danish text that already exists. Full translation is out of scope.</p></details>
+    <details><summary>Do you guarantee more sales?</summary><p>No. You get fewer errors and a store that reads as Danish. Conversion depends on much more.</p></details>
+    <details><summary>Will you place a real order to test checkout?</summary><p>No. The flow is tested in your test mode or with test data you provide. No real payments, no personal data.</p></details>
+    <details><summary>When is this not for you?</summary><p>If your Danish site is written by Danish staff or a professional Danish agency, if you need legal review of terms or product-safety rules, if you need Swedish, Norwegian or Finnish review, or if you need it within 24 hours.</p></details>
+  </section>
+
+  <footer>
+    <div>Danish Storefront QA · Philip Lind, Aarhus, Denmark · Contact via <a href="https://www.upwork.com/freelancers/~0126d96b2959a13a98" target="_blank" rel="noopener">Upwork</a></div>
+    <div>Privacy: a scan stores the domain you scanned and a daily-rotating hashed form of your IP address for 30 days, only to limit abuse. The page you scan is not stored.</div>
+    <div>Findings are machine candidates, not verdicts. The example result names no shop.</div>
+  </footer>
+</div>
+
+<script>
+(function () {
+  const PREVIEW = /*PREVIEW*/false;
+  const API = "https://jgmvatoywfebukdaagle.supabase.co/functions/v1/dsqa-scan";
+  const ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpnbXZhdG95d2ZlYnVrZGFhZ2xlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMzODI2MDgsImV4cCI6MjEwODk1ODYwOH0.CKkODq_5FNk0x62KmHZm3aHSKUtgLPxg37UGQwTabo0";
+  const LABEL = { T1: "Untranslated key", T2: "English UI text", T3: "English text block", T4: "Swedish/Norwegian text", F1: "Page language", F2: "Currency", F3: "Price format", F4: "hreflang" };
+  // Real scan of a Swedish retailer's Danish homepage, 30 Oct 2026. Shop not named.
+  const EXAMPLE = {
+    ok: true, url: "https://(Swedish home retailer).dk/", status: 200, htmlLang: "da-dk", textNodes: 219, visibleFindings: 1,
+    summary: { T1: 0, T2: 0, T3: 0, T4: 1, F1: 0, F2: 0, F3: 0, F4: 0 },
+    findings: [{ check: "T4", severity: "high", message: "Swedish word on a Danish page", evidence: "Allt för hemmet till lågt pris", location: "text", visible: true, fix: "Alt til hjemmet til lave priser" }],
+    note: "Machine findings are candidates, not verdicts."
+  };
+  const $ = (id) => document.getElementById(id);
+  const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
+
+  function render(r, isExample) {
+    const box = $("scan-result");
+    box.replaceChildren();
+    const head = el("div", "result-head");
+    if (isExample) head.append(el("span", "tag example", "Example result"));
+    head.append(el("span", "url", r.finalUrl || r.url));
+    if (r.htmlLang != null) head.append(el("span", "tag", "lang=" + (r.htmlLang || "none")));
+    box.append(head);
+    if (!r.ok) {
+      box.append(el("p", "status", (r.inconclusive && r.inconclusive.message) || r.error || "The page could not be checked."));
+      box.append(el("p", "note", "Inconclusive results are not findings."));
+      return;
+    }
+    const counts = el("div", "counts");
+    const total = (r.findings || []).length;
+    const vis = r.visibleFindings || 0;
+    const c1 = el("span", "count" + (vis ? " hot" : "")); c1.append(el("strong", null, String(vis)), document.createTextNode(" in visible text"));
+    const c2 = el("span", "count"); c2.append(el("strong", null, String(total - vis)), document.createTextNode(" in attributes or page settings"));
+    counts.append(c1, c2);
+    box.append(counts);
+    if (!total) {
+      box.append(el("p", null, "No machine findings on this page. The scanner cannot judge whether the Danish reads naturally; that needs a native reviewer."));
+      return;
+    }
+    const ul = el("ul", "findings");
+    for (const f of r.findings.slice(0, 25)) {
+      const li = el("li", f.severity);
+      li.append(el("span", "sev", f.severity), el("span", "f-msg", (LABEL[f.check] || f.check) + ": " + f.message));
+      li.append(el("span", "f-ev", f.evidence));
+      const where = f.location === "text" ? "Visible page text" : f.location === "attribute" ? "Attribute " + (f.attribute || "") + " (often not visible: alt text, tooltip, screen-reader label)" : f.location === "script" ? "Inside a script (may not be shown)" : "Page setting";
+      li.append(el("span", "f-where", where));
+      if (f.fix) li.append(el("span", "f-fix", "→ " + f.fix));
+      ul.append(li);
+    }
+    box.append(ul);
+    if (r.findings.length > 25) box.append(el("p", "note", (r.findings.length - 25) + " more findings not shown."));
+    box.append(el("p", "note", r.note || ""));
+  }
+
+  render(EXAMPLE, true);
+
+  if (PREVIEW) {
+    $("scan-url").disabled = true;
+    $("scan-btn").disabled = true;
+    $("scan-fine").textContent = "Preview: live scanning runs on the published page. The example below is a real result.";
+    return;
+  }
+
+  $("scan-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const url = $("scan-url").value.trim();
+    const status = $("scan-status");
+    status.className = "status";
+    if (!url) { status.className = "status error"; status.textContent = "Enter the address of a Danish page, for example yourshop.com/da-dk."; return; }
+    $("scan-btn").disabled = true;
+    status.textContent = "Scanning " + url + " …";
+    try {
+      const res = await fetch(API, { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + ANON, apikey: ANON }, body: JSON.stringify({ url }) });
+      const data = await res.json().catch(() => ({}));
+      if (res.status === 429) { status.className = "status error"; status.textContent = "You have reached the scan limit. Try again in an hour."; return; }
+      if (!res.ok) { status.className = "status error"; status.textContent = data.error || "The scanner is unavailable right now. Try again later."; return; }
+      status.textContent = data.ok ? "Done." : "The page could not be checked.";
+      render(data, false);
+    } catch (err) {
+      status.className = "status error";
+      status.textContent = "Could not reach the scanner. Check your connection and try again.";
+    } finally {
+      $("scan-btn").disabled = false;
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
