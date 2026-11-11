@@ -149,6 +149,7 @@ footer { border-top: 1px solid var(--rule); padding-top: 18px; display: grid; ga
     </form>
     <p class="fine" id="scan-fine">One public page, fetched once from a server in Sweden. Shops that change content by visitor country may look different to your customers. Up to 10 scans per hour.</p>
     <p class="status" id="scan-status" role="status" aria-live="polite"></p>
+     <p class="fine" id="scan-fallback" hidden>Automated scanning is temporarily unavailable. You can still <a href="mailto:shopairlind@gmail.com?subject=Danish%20QA%20one-page%20pilot%20enquiry">ask for a written native Danish one-page review</a> ($49 introductory pilot, up to 500 existing words). This email link is an enquiry, not a payment checkout.</p>
     <div class="result" id="scan-result"></div>
   </section>
 
@@ -334,17 +335,17 @@ footer { border-top: 1px solid var(--rule); padding-top: 18px; display: grid; ga
     status.className = "status";
     if (!url) { status.className = "status error"; status.textContent = "Enter the address of a Danish page, for example yourshop.com/da-dk."; return; }
     $("scan-btn").disabled = true;
-    status.textContent = "Scanning " + url + " …";
+    status.textContent = "Scanning " + url + " …"; $("scan-fallback").hidden = true;
     try {
       const res = await fetch(API, { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + ANON, apikey: ANON }, body: JSON.stringify({ url }) });
       const data = await res.json().catch(() => ({}));
       if (res.status === 429) { status.className = "status error"; status.textContent = "You have reached the scan limit. Try again in an hour."; return; }
-      if (!res.ok) { status.className = "status error"; status.textContent = data.error || "The scanner is unavailable right now. Try again later."; return; }
+      if (!res.ok) { status.className = "status error"; status.textContent = data.error || "The scanner is unavailable right now. Try again later."; $("scan-fallback").hidden = false; return; }
       status.textContent = data.ok ? "Done." : "The page could not be checked.";
       render(data, false);
     } catch (err) {
       status.className = "status error";
-      status.textContent = "Could not reach the scanner. Check your connection and try again.";
+      status.textContent = "Could not reach the scanner. Check your connection and try again."; $("scan-fallback").hidden = false;
     } finally {
       $("scan-btn").disabled = false;
     }
