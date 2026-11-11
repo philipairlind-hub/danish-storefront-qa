@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shopify Supplier CSV Import Checklist | New Product Data QA</title>
+<meta name="description" content="Check supplier CSV and Excel product data before a new-product Shopify import. 10 practical checks for SKUs, variants, handles, prices, missing fields, encoding and risky records. Fixed-scope file QA from $49.">
+<link rel="canonical" href="https://philipairlind-hub.github.io/danish-storefront-qa/supplier-file-qa/">
+<meta property="og:title" content="Shopify Supplier Spreadsheet QA — Import Readiness Checklist">
+<meta property="og:type" content="article">
+<style>
+:root{--paper:#f7f8f5;--ink:#172033;--muted:#536070;--line:#d8dfd8;--accent:#af1836}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}header{background:white;border-bottom:1px solid var(--line)}nav,main,footer{max-width:850px;margin:auto;padding:24px}nav{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-block:15px}h1,h2{line-height:1.2}h1{font-size:clamp(2rem,5vw,3rem);letter-spacing:-.035em;margin:.4em 0}p{margin:0 0 16px}.lead{font-size:1.12rem}.eyebrow{color:var(--muted);text-transform:uppercase;letter-spacing:.12em;font-size:.75rem;font-weight:bold}.panel{border:1px solid var(--line);background:white;padding:22px;border-radius:7px;margin:24px 0}a{color:var(--accent)}a:focus-visible{outline:3px solid var(--accent);outline-offset:3px}.cta{display:inline-block;padding:11px 17px;border-radius:5px;background:var(--accent);color:white;text-decoration:none;font-weight:700}.cta.alt{border:1px solid var(--accent);color:var(--accent);background:white}li{margin:15px 0;padding-left:6px}.muted{color:var(--muted)}.note{border-left:3px solid var(--accent);padding:10px 15px;background:white}footer{border-top:1px solid var(--line);font-size:.9rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<header><nav><strong>Independent ecommerce QA tools</strong><a href="../">Danish language scanner</a></nav></header>
+<main>
+<p class="eyebrow">Shopify product data · New products only · Updated November 2026</p>
+<h1>Supplier spreadsheet to Shopify CSV: a pre-import QA checklist</h1>
+<p class="lead">A supplier CSV or Excel sheet may contain 100 rows and still be unsuitable for Shopify. Map the data, separate exceptions, and review every source before allowing an import to create products.</p>
+<p>This checklist is for ecommerce teams and agencies importing <strong>new</strong> products. It is educational content, not a live import validation service or a recommendation to overwrite existing store data.</p>
+<h2>Ten checks before your first product import</h2>
+<ol>
+<li><strong>Confirm that you are creating new products, not overwriting existing ones.</strong> Obtain the store owner's approval and compare proposed URL handles with existing products. Shopify's overwrite-with-matching-handles setting can replace existing values. Leave it off unless that is the expressly agreed operation.</li>
+<li><strong>Identify each source column and its meaning.</strong> Ask the supplier what SKU, parent product ID, color, size, price, cost and stock fields actually represent. Do not guess a mapping just because column names look similar.</li>
+<li><strong>Separate products from variant rows.</strong> One product offered in three sizes can require multiple variant rows. Confirm that product handles group the correct variants, and that the available option combinations are unambiguous.</li>
+<li><strong>Check uniqueness, missingness and exceptions.</strong> Identify blank or duplicate SKUs, repeated product IDs, inconsistent handles, unknown option values and records with incomplete key fields. Hold uncertain records for manual review instead of silently fabricating information.</li>
+<li><strong>Check prices and decimals.</strong> Determine supplier currency and whether a price is retail price or cost. Shopify's import fields expect the intended price structure; never silently apply an exchange rate or markup without an agreed business rule.</li>
+<li><strong>Keep text encoding, quoting and delimiter rules correct.</strong> Confirm the supplier file's delimiter, UTF-8 handling, embedded commas, quotes and multiline descriptions. Shopify recommends UTF-8 CSV files; test representative rows before processing the full dataset.</li>
+<li><strong>Validate publication status, tax and inventory intent.</strong> Decide whether new products should start as drafts; do not assume an unknown supplier stock number can be imported safely. Inventory across locations, product taxes and fulfillment rules need store-side decisions.</li>
+<li><strong>Review image URLs separately.</strong> Shopify product CSVs use accessible image URLs rather than binary images embedded in the file. Verify image ownership, URLs and intended assignment; a file-only data service cannot promise to source or host images.</li>
+<li><strong>Check dependencies before changing existing variant options.</strong> Shopify warns that option changes can create new variant IDs and affect third-party integrations. Test any update-to-existing workflow separately, outside a new-products-only service.</li>
+<li><strong>Run a small authorized test and preserve a source audit trail.</strong> Review output rows, exceptions and source references. Test import in a development store or approved safe workflow first; keep the owner responsible for the final import.</li>
+</ol>
+<div class="panel">
+<p class="eyebrow">Fixed-scope file preparation</p>
+<h2>SupplierPreflight — from $49 per batch</h2>
+<p>For <strong>new products only</strong>, prepare a Shopify product-import candidate CSV from one supplier CSV/XLSX sheet and receive an exceptions file, an HTML QA report and cell-level source tracing.</p>
+<p><strong>Starter: $49</strong> for up to 100 variant rows, 30 source columns and 8 MiB. Up to three product option dimensions. Delivery within three calendar days after agreed input and funded scope; includes one rerun using corrected source data with the same mapping.</p>
+<p>It does <strong>not</strong> perform your store import, scrape supplier sites, update existing products, synchronize inventory, host images, configure metafields or install integrations. Larger defined tiers are available on the purchase listing.</p>
+<p><a class="cta" href="https://www.upwork.com/services/product/admin-customer-support-a-shopify-import-csv-from-your-supplier-spreadsheet-with-a-qa-report-2117968533993668014" target="_blank" rel="noopener noreferrer">See $49 SupplierPreflight order options</a></p>
+<p><a href="mailto:shopairlind@gmail.com?subject=SupplierPreflight%20CSV%20scope%20request&body=Approximate%20variant%20rows%3A%0ASource%20format%3A%0AColumns%20or%20mapping%20question%3A">Ask about fit and scope by email</a> before sharing confidential data. One paid order is not guaranteed by a quote request.</p>
+</div>
+<h2>When another tool is a better fit</h2>
+<p>If you need automatic ongoing inventory sync, API integration, product image hosting or a full migration, use a service specializing in those activities. If you only need general data cleaning rather than Shopify new-product output, <a href="https://www.upwork.com/services/product/development-it-an-audited-csv-or-excel-product-file-with-an-error-log-and-safe-fixes-2117654130963966547" target="_blank" rel="noopener noreferrer">the separate CSV/Excel QA service</a> is a more suitable scope.</p>
+<p>Expanding into Danish? Our <a href="../checklist/">Danish Shopify localization checklist</a> and <a href="../">free single-page language scanner</a> are separate services and do not validate product-import data.</p>
+<h2>Official Shopify references</h2>
+<ul>
+<li><a href="https://help.shopify.com/en/manual/products/import-export/using-csv">Shopify Help — Product CSV format and columns</a></li>
+<li><a href="https://help.shopify.com/en/manual/products/import-export/import-products">Shopify Help — Import products with CSV and overwrite considerations</a></li>
+<li><a href="https://help.shopify.com/en/manual/products/import-export/export-products">Shopify Help — Export products and cautions when sorting</a></li>
+</ul>
+<p class="note"><strong>Important:</strong> This is an independent supplier-file readiness checklist, not an official Shopify verification tool, endorsement or guarantee that any import will succeed. Shopify's format can change; check its latest official documentation before importing.</p>
+</main>
+<footer>Independent product data QA by Philip Lind · Written enquiries: <a href="mailto:shopairlind@gmail.com">shopairlind@gmail.com</a> · <a href="../">Danish Storefront QA</a></footer>
+</body>
+</html>
