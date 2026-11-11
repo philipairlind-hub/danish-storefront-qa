@@ -1,21 +1,42 @@
-# Danish Storefront QA
+# Danish Storefront QA — live Shopify language and supplier-file QA
 
-Free one-page scan for leftover English and Swedish text on Danish webshops, plus a fixed-price native Danish review (sold via Upwork).
+Independent ecommerce QA utilities and fixed-scope services by Philip Lind, Aarhus, Denmark.
 
-## Parts
-- `supabase/functions/dsqa-scan/` — Supabase Edge Function (Deno). POST `{"url": "..."}` returns machine findings for ONE public page.
-  SSRF-safe fetch (public IPs only, ports 80/443, re-validated per redirect; adapted from `seo-regression-guard`), 12 s timeout, 2 MB cap.
-  Rate limits in Postgres: 10 scans/hour per caller, 300/day total (`supabase/migrations/20261030_scan_events.sql`).
-  Stores only the scanned domain and a daily-rotating salted IP hash, deleted after 30 days.
-- `web/page.html` — product page source (artifact fragment). `web/index.html` = static-hosting build. `web/artifact.html` = preview build (scanner disabled).
-- `cli/scan.ts` — local delivery CLI: `deno run --allow-net cli/scan.ts --md URL...` writes a Markdown issue log.
-- `test/` — `deno test --allow-net=none test/` (14 tests: checks, regressions, SSRF, scan states).
-- `docs/` — PRD, handoff, QA report, offer, sample report. Internal research, prospects and economics are kept outside the repo (owner folder + Notion).
+## Free public tools and guides
 
-## Deployed
-- Supabase project `danish-storefront-qa` (ref `jgmvatoywfebukdaagle`, eu-north-1, free plan). Function `dsqa-scan` v1, `verify_jwt=true` (callers send the public anon key).
-- Product page: not publicly hosted yet (needs owner approval). Private preview exists as a Claude artifact.
+| Resource | Public URL | Scope |
+| --- | --- | --- |
+| Free Danish storefront text scan | [Open scanner](https://philipairlind-hub.github.io/danish-storefront-qa/) | One publicly available page; candidate English/Swedish remnants and missing translation strings |
+| Danish Shopify launch checklist | [Read 12-point checklist](https://philipairlind-hub.github.io/danish-storefront-qa/checklist/) | Manual pre-launch review of language, pricing, theme strings, checkout and emails |
+| Supplier spreadsheet import guide | [Read 10-point checklist](https://philipairlind-hub.github.io/danish-storefront-qa/supplier-file-qa/) | New-product import preparation, variants, SKUs, prices and exceptions |
+| Supplier CSV Quick Check | [Check a CSV locally](https://philipairlind-hub.github.io/danish-storefront-qa/csv-check/) | Free client-side CSV structure check; no upload, account or analytics. Maximum 3 MiB and 10,000 data records |
 
-## Limits (honest)
-Machine findings are candidates. The scanner cannot judge whether Danish reads naturally, cannot see JavaScript-rendered text,
-and sees the page as a visitor in Sweden would (geo-dependent shops may differ). Attribute findings (alt, title, aria-label) are often not visible.
+The CSV tool flags unusual record widths, repeated SKU *candidates*, column-heading problems and basic price-format issues. **It does not certify Shopify import readiness.** A CSV with zero warnings can still be unsafe to import.
+
+## Existing paid buyer routes
+
+- **Danish native QA $49 first-order pilot:** One public page, up to 500 existing words, prioritized wording findings and corrections, within 3 business days after scope/payment agreement. [Request through the main site](https://philipairlind-hub.github.io/danish-storefront-qa/). This $49 button opens a written inquiry; it is **not an instant card checkout**.
+- **Danish Entry $95 / Core $350:** [Contra Entry service](https://contra.com/s/67lEQPZ2-native-danish-review-of-your-ai-translated-store), or [Upwork tiered service](https://www.upwork.com/services/product/2116240404745706041). Entry covers up to 1,500 existing words; Core up to 5,000. Terms and payments follow the chosen provider.
+- **SupplierPreflight from $49:** [Shopify new-product supplier-file preparation](https://www.upwork.com/services/product/admin-customer-support-a-shopify-import-csv-from-your-supplier-spreadsheet-with-a-qa-report-2117968533993668014), up to 100 variant rows/30 source columns/8 MiB in Starter. Output is a Shopify import candidate, exceptions, HTML QA report and source-level provenance. Buyer performs the actual import. No scraping, image hosting, inventory synchronization or overwriting existing products.
+- **General CSV/Excel QA from $99:** [Independent data QA service](https://www.upwork.com/services/product/development-it-an-audited-csv-or-excel-product-file-with-an-error-log-and-safe-fixes-2117654130963966547). Scope differs from SupplierPreflight.
+
+Written questions: shopairlind@gmail.com. Don't send confidential source or customer files before a data-handling agreement.
+
+## Source and deployment
+
+- \`supabase/functions/dsqa-scan/\`: Deno/Supabase free public-page scanner. Historical design: SSRF-safe public IP validation, port 80/443 restrictions, re-validation after redirects, a 12-second timeout and 2 MiB cap. The Postgres rate-limit design states 10 scans/hour per caller, 300/day total; salted IP hashes are rotated and deleted after 30 days, and only scanned domains are retained, not page contents.
+- \`web/index.html\`: main page source; \`gh-pages/index.html\` is the public deployed copy.
+- \`web/checklist.html\`, \`web/supplier-file-qa.html\`, \`web/csv-check.html\`: the three new guides/free-tool sources on \`main\`. Their public copies live in matching subfolders of \`gh-pages/\`.
+- \`cli/scan.ts\`: Deno local-delivery issue-log CLI.
+- \`test/\`: Danish page-scanner test suite; historical project documentation reported 14 checks.
+- \`docs/\`: requirements, QA notes and synthetic example documentation. Some documents are historical, not proof of orders.
+
+[Public sitemap, 4 verified URLs](https://philipairlind-hub.github.io/danish-storefront-qa/sitemap.xml). Update both source and public GitHub branches when editing the website, then independently verify the live page.
+
+## Limits and verification (11 November 2026)
+
+The Danish language scanner is a limited machine pre-scan, not native Danish proofreading. It cannot see protected checkout, JavaScript-only rendering, customer notifications or geolocation-specific content, and it cannot judge natural language tone.
+
+The separate CSV Quick Check has 12 logic checks passed for quoting, line endings, UTF-8 BOM, field widths, duplicate SKU candidates and basic price warnings. A synthetic-data DOM-script smoke test also passed: four records and three review findings. This is not a complete real-browser or Shopify-import acceptance test. Historical Danish scanner tests were not freshly rerun during this update.
+
+All four public pages and the sitemap were fetched after deployment. **No independently paid customer orders, claims of increased conversion, testimonials or certification are asserted.** This project is independent and is not endorsed by Shopify.
