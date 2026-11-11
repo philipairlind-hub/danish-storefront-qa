@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Free Shopify Supplier CSV Quick Check — Local File Review</title>
+<meta name="description" content="Check a supplier CSV locally in your browser: delimiter and row consistency, duplicate SKU candidates, and basic price-format warnings. No upload or login. Paid Shopify import preparation from $49.">
+<link rel="canonical" href="https://philipairlind-hub.github.io/danish-storefront-qa/csv-check/">
+<meta property="og:title" content="Free Supplier CSV Quick Check — Local Browser Tool">
+<style>
+:root{--ink:#152033;--muted:#516076;--line:#d6dfd9;--bg:#f5f7f4;--accent:#ad1738}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}header{background:white;border-bottom:1px solid var(--line)}nav,main,footer{max-width:890px;margin:auto;padding:20px 24px}nav{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}.eyebrow{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}h1,h2{line-height:1.18}h1{font-size:clamp(2rem,5vw,3rem);margin:.3em 0}h2{font-size:1.35rem}p{margin:0 0 18px}.lead{font-size:1.1rem}.panel{background:white;border:1px solid var(--line);border-radius:8px;padding:22px;margin:24px 0}.stack{display:grid;gap:15px}label{font-weight:600}input,select{font:inherit;max-width:100%;padding:10px;border:1px solid #79869b;border-radius:4px}input[type=file]{width:100%}button,.button{font:inherit;font-weight:700;display:inline-block;background:var(--accent);color:white;border:0;border-radius:5px;padding:12px 17px;text-decoration:none;cursor:pointer}button.secondary{background:white;color:var(--accent);border:1px solid var(--accent)}button:hover,.button:hover{filter:brightness(.91)}a{color:var(--accent)}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:3px}.muted{color:var(--muted)}.summary{font-size:1.05rem;font-weight:700}ol li{margin:10px 0}ul.issues{list-style:none;padding:0}ul.issues li{border-bottom:1px solid var(--line);padding:12px 0}.detail{color:var(--muted);font-size:.9rem}.notice{border-left:4px solid var(--accent);padding:12px 15px;background:#fff}footer{border-top:1px solid var(--line);font-size:.86rem;color:var(--muted)}[hidden]{display:none!important}
+</style></head>
+<body><header><nav><strong>Independent Shopify data QA</strong><a href="../supplier-file-qa/">Supplier-file checklist</a></nav></header>
+<main>
+<p class="eyebrow">Free local browser utility · CSV only</p>
+<h1>Quick-check a supplier CSV before import</h1>
+<p class="lead">Spot basic CSV structure and data-quality warnings before you prepare new Shopify products. This is a first-pass checker, <strong>not</strong> a full Shopify import validator or a guarantee that a file will import.</p>
+<div class="panel">
+<h2>Run a local CSV check</h2>
+<p>Choose a CSV file, then inspect candidate problems. All parsing takes place inside your browser; this page has no upload endpoint, account or analytics.</p>
+<div class="stack">
+<label for="csv-file">Your CSV file (UTF-8, up to 3 MB / 10,000 data records)</label>
+<input id="csv-file" type="file" accept=".csv,text/csv">
+<label for="delimiter">CSV delimiter</label>
+<select id="delimiter"><option value="auto">Auto-detect from header</option><option value=",">Comma (,)</option><option value=";">Semicolon (;)</option></select>
+<div style="display:flex;gap:10px;flex-wrap:wrap"><button id="check" type="button">Check CSV locally</button><button id="sample" type="button" class="secondary">Try synthetic example</button></div>
+</div>
+<div id="status" role="status" aria-live="polite" class="muted" style="margin-top:14px">No data inspected.</div>
+<div id="results" hidden>
+<h2>Review summary</h2>
+<p class="summary" id="summary"></p>
+<p id="scope" class="muted"></p>
+<ul class="issues" id="issues"></ul>
+<p id="more" class="muted"></p>
+</div>
+</div>
+<div class="notice"><strong>Limitations:</strong> The checker examines CSV record widths, headers, repeated SKU candidates, and basic prices where recognizable columns exist. It does not map arbitrary supplier fields, validate your complete Shopify schema, check all images/metafields, verify SKU uniqueness in your store, inspect stock levels, or perform any import. Repeated SKUs or missing handles can be intentional. Always review the output yourself.</div>
+<div class="panel">
+<p class="eyebrow">When you need an import candidate, exceptions and traceability</p>
+<h2>SupplierPreflight file preparation — from $49</h2>
+<p>For one agreed new-product supplier CSV/XLSX sheet, our separate paid service prepares a Shopify import candidate, exceptions list, HTML QA report and source-cell history. Starter covers up to 100 variant rows and 8 MiB, delivered within three calendar days of agreed scope and funding. Your team controls the actual import.</p>
+<p><a class="button" href="https://www.upwork.com/services/product/admin-customer-support-a-shopify-import-csv-from-your-supplier-spreadsheet-with-a-qa-report-2117968533993668014" target="_blank" rel="noopener noreferrer">View $49 paid service and requirements</a></p>
+<p><a href="mailto:shopairlind@gmail.com?subject=SupplierPreflight%20new-product%20CSV%20request">Ask about a paid file-preparation scope</a>. Do not email confidential data before agreeing delivery and handling.</p>
+</div>
+<p class="muted">For a fuller walkthrough, read the <a href="../supplier-file-qa/">10-point supplier-file import readiness guide</a>. Independent tool, not affiliated with or endorsed by Shopify.</p>
+</main>
+<footer>Independent CSV review tool by Philip Lind · <a href="../">Danish Storefront QA</a> · <a href="mailto:shopairlind@gmail.com">shopairlind@gmail.com</a></footer>
+<script>
+function parseCsv(raw, delimiter) {
+  if (delimiter !== "," && delimiter !== ";") throw new Error("Choose comma or semicolon delimiter.");
+  const text = raw.replace(/^\uFEFF/, "");
+  const rows = [];
+  let row = [], cell = "", quoted = false, afterQuote = false;
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (quoted) {
+      if (ch === '"') {
+        if (text[i + 1] === '"') { cell += '"'; i++; }
+        else { quoted = false; afterQuote = true; }
+      } else cell += ch;
+    } else {
+      if (ch === delimiter) { row.push(cell); cell = ""; afterQuote = false; }
+      else if (ch === "\n" || ch === "\r") {
+        row.push(cell); rows.push(row); row = []; cell = ""; afterQuote = false;
+        if (ch === "\r" && text[i + 1] === "\n") i++;
+        if (rows.length > 10002) throw new Error("Too many records. Maximum 10,000 data records.");
+      } else if (ch === '"' && cell === "" && !afterQuote) { quoted = true; }
+      else if (ch === '"' || afterQuote) throw new Error("Malformed CSV quoting: check quote and separator placement.");
+      else cell += ch;
+    }
+  }
+  if (quoted) throw new Error("Unclosed quoted CSV field.");
+  if (cell !== "" || row.length > 0 || afterQuote) { row.push(cell); rows.push(row); }
+  if (rows.length === 0) throw new Error("File has no CSV records.");
+  if (rows.length - 1 > 10000) throw new Error("Too many data records. Maximum 10,000.");
+  return rows;
+}
+function guessDelimiter(text) {
+  let comma=0, semi=0, quoted=false, count=0;
+  for (let i=0; i<text.length && count<10000;i++,count++) {
+    const c=text[i];
+    if (c==='"') {
+      if (quoted && text[i+1]==='"') {i++;continue;}
+      quoted=!quoted;
+    } else if(!quoted && (c==='\n'||c==='\r')) break;
+    else if(!quoted && c===',') comma++;
+    else if(!quoted && c===';') semi++;
+  }
+  return semi>comma ? ";" : ",";
+}
+function inspectCsv(rows) {
+  const headers=rows[0].map(x=>x.trim()), cols=headers.length;
+  const findings=[];
+  let count=0;
+  const add=(kind,record,message)=>{count++;if(findings.length<45)findings.push({kind,record,message});};
+  if(cols<2) add("Review",1,"Only one header column was parsed. Check the chosen CSV delimiter.");
+  if(cols>200) add("Review",1,"More than 200 columns. This lightweight checker is not designed for very wide files.");
+  const normalized=headers.map(h=>h.toLowerCase().replace(/\s+/g," "));
+  const seenHeaders=new Set();
+  normalized.forEach((h,i)=>{
+    if(!h) add("Review",1,"Blank column heading at position "+(i+1)+".");
+    else if(seenHeaders.has(h)) add("Review",1,"Duplicate heading: "+headers[i].slice(0,80)+".");
+    else seenHeaders.add(h);
+  });
+  const findCol=names=>normalized.findIndex(h=>names.includes(h));
+  const sku=findCol(["sku","variant sku"]);
+  const price=findCol(["price","variant price"]);
+  const handle=findCol(["url handle","handle"]);
+  const skuCounts=new Map();
+  let noData=0;
+  for(let i=1;i<rows.length;i++){
+    const row=rows[i], rec=i+1;
+    if(row.length!==cols) {add("Review",rec,"Field count "+row.length+" does not match the "+cols+" headings.");continue;}
+    if(row.every(v=>v.trim()==="")){noData++;add("Review",rec,"Blank data record.");continue;}
+    if(sku>=0){
+      const value=row[sku].trim();
+      if(value){
+        const key=value.toLowerCase();
+        if(skuCounts.has(key))add("Check",rec,"Repeated SKU; verify whether intentional for this source.");
+        else skuCounts.set(key,rec);
+      }
+    }
+    if(price>=0){
+      const v=row[price].trim();
+      if(v && !/^\d+(\.\d+)?$/.test(v))add("Review",rec,"Price is not a nonnegative dot-decimal number; confirm currency and expected import field.");
+    }
+    if(handle>=0 && !row[handle].trim()){
+      add("Check",rec,"Blank product handle; Shopify may derive handles, but review consistency.");
+    }
+  }
+  return {recordCount:rows.length-1,columnCount:cols,findings,total:count,more:Math.max(0,count-findings.length),hasSku:sku>=0,hasPrice:price>=0,blankRecords:noData};
+}
+(function(){
+"use strict";
+var file=document.getElementById("csv-file");
+var delimiter=document.getElementById("delimiter");
+var status=document.getElementById("status");
+var results=document.getElementById("results");
+var summary=document.getElementById("summary");
+var scope=document.getElementById("scope");
+var issues=document.getElementById("issues");
+var more=document.getElementById("more");
+function showError(message){results.hidden=true;status.textContent="Check stopped: "+message;}
+function display(text,label){
+ try{
+  var delim=delimiter.value==="auto"?guessDelimiter(text):delimiter.value;
+  var rows=parseCsv(text,delim);
+  var a=inspectCsv(rows);
+  summary.textContent=a.recordCount+" data records · "+a.columnCount+" columns · "+a.total+" findings requiring review";
+  scope.textContent=label+" · Parsed as "+(delim===","?"comma":"semicolon")+" CSV. Warnings are not proof of import failure.";
+  while(issues.firstChild)issues.removeChild(issues.firstChild);
+  a.findings.forEach(function(v){
+   var li=document.createElement("li");var head=document.createElement("strong");
+   head.textContent=v.kind+" · record "+v.record;
+   var line=document.createElement("div");line.textContent=v.message;line.className="detail";
+   li.appendChild(head);li.appendChild(line);issues.appendChild(li);
+  });
+  more.textContent=a.more? a.more+" additional findings not displayed. Inspect the source file before import." : (a.total===0?"No findings in the limited checks performed. This does not mean the file is Shopify-ready.":"");
+  results.hidden=false;status.textContent="Local check complete. The file was not uploaded.";
+ }catch(e){showError(e&&e.message?e.message:"Unable to parse this CSV.");}
+}
+document.getElementById("check").addEventListener("click",async function(){
+ results.hidden=true;
+ var chosen=file.files&&file.files[0];
+ if(!chosen){showError("Please select a CSV file.");return;}
+ if(chosen.size>3*1024*1024){showError("File is over the 3 MB local limit.");return;}
+ try{
+  status.textContent="Reading file locally…";
+  var raw=await chosen.arrayBuffer();
+  var text=new TextDecoder("utf-8",{fatal:true}).decode(raw);
+  display(text,"Local file");
+ }catch(e){showError("The file could not be decoded as UTF-8 CSV.");}
+});
+document.getElementById("sample").addEventListener("click",function(){
+ var s='URL handle,Title,SKU,Price,Option1 name,Option1 value\nstarter-mug,Mug,M-100,19.90,Color,Blue\nstarter-mug,,M-100,19.90,Color,Red\nbad-lamp,Lamp,L-101,not-a-price,Color,Black\nmissing,short-row\n';
+ display(s,"Synthetic example only");
+});
+})();
+</script></body></html>
