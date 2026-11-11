@@ -139,9 +139,9 @@ var scope=document.getElementById("scope");
 var issues=document.getElementById("issues");
 var more=document.getElementById("more");
 function showError(message){results.hidden=true;status.textContent="Check stopped: "+message;}
-function display(text,label){
+function display(text,label,forcedDelimiter){
  try{
-  var delim=delimiter.value==="auto"?guessDelimiter(text):delimiter.value;
+  var delim=forcedDelimiter||(delimiter.value==="auto"?guessDelimiter(text):delimiter.value);
   var rows=parseCsv(text,delim);
   var a=inspectCsv(rows);
   summary.textContent=a.recordCount+" data records · "+a.columnCount+" columns · "+a.total+" findings requiring review";
@@ -171,7 +171,7 @@ document.getElementById("check").addEventListener("click",async function(){
 });
 document.getElementById("sample").addEventListener("click",function(){
  var s='URL handle,Title,SKU,Price,Option1 name,Option1 value\nstarter-mug,Mug,M-100,19.90,Color,Blue\nstarter-mug,,M-100,19.90,Color,Red\nbad-lamp,Lamp,L-101,not-a-price,Color,Black\nmissing,short-row\n';
- display(s,"Synthetic example only");
+ display(s,"Synthetic example only",",");
 });
 })();
 </script></body></html>
