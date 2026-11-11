@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HVAC Estimate Follow-Up Spreadsheet Checklist | Free 7-Step Review</title>
+<meta name="description" content="A practical 7-step checklist for reviewing open HVAC and home-service quotes in a spreadsheet. Check status, dates, duplicates and contact permission before follow-up.">
+<link rel="canonical" href="https://philipairlind-hub.github.io/danish-storefront-qa/hvac-estimate-follow-up-checklist/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HVAC Estimate Follow-Up: A Practical Spreadsheet Checklist">
+<meta property="og:description" content="Seven checks to help home-service teams review open estimate exports before deciding on follow-ups. Includes a synthetic CSV example and a free starter template.">
+<meta property="og:url" content="https://philipairlind-hub.github.io/danish-storefront-qa/hvac-estimate-follow-up-checklist/">
+<meta name="twitter:card" content="summary">
+<style>
+:root{--bg:#f5f6f2;--ink:#193f38;--sub:#4b645d;--border:#d5dfd7;--paper:#fffef9}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.68 system-ui,-apple-system,Segoe UI,Arial,sans-serif}
+header,main,footer{max-width:860px;margin:auto;padding:24px}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--border)}
+header a{font-weight:750}
+h1{font-size:clamp(2.1rem,4vw,3.6rem);letter-spacing:-.045em;line-height:1.13;margin:.25em 0}
+h2{font-size:1.55rem;line-height:1.3;margin:1.9em 0 .6em}
+h3{font-size:1.13rem;line-height:1.35;margin:1.4em 0 .4em}
+p{margin:.65em 0 1.1em}
+a{color:var(--ink)}a:focus-visible{outline:3px solid #92721e;outline-offset:3px}
+.eyebrow{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--sub);font-weight:800}
+.lead{font-size:1.17rem;color:#365b51}
+.panel{padding:22px;background:var(--paper);border:1px solid var(--border);border-radius:12px;margin:24px 0}
+.button{display:inline-block;background:var(--ink);color:#fff;text-decoration:none;font-weight:700;padding:13px 18px;border-radius:6px;margin:6px 10px 6px 0}
+.button.alt{background:#e0ece7;color:var(--ink)}
+ol{padding-left:1.5em}li{padding-left:.4em;margin:13px 0}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+td,th{border:1px solid var(--border);padding:10px;text-align:left;vertical-align:top}
+th{background:#e0ece7}
+.scroll{overflow-x:auto}
+code{font-size:.9em;overflow-wrap:anywhere}
+.small{font-size:.87rem;color:var(--sub)}
+footer{border-top:1px solid var(--border);font-size:.88rem;color:var(--sub)}
+@media(max-width:600px){header,main,footer{padding:18px}.panel{padding:18px}}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"HVAC Estimate Follow-Up Spreadsheet Checklist","description":"Seven checks for a human-led review of open estimate CSV exports.","datePublished":"2026-11-11","author":{"@type":"Person","name":"Philip Lind"},"mainEntityOfPage":"https://philipairlind-hub.github.io/danish-storefront-qa/hvac-estimate-follow-up-checklist/"}</script>
+</head>
+<body>
+<header><a href="https://philipairlind-hub.github.io/danish-storefront-qa/quote-recovery/">LIND WORKBENCH / QUOTE RECOVERY</a><a href="https://philipairlind-hub.github.io/danish-storefront-qa/quote-recovery/">View the $19 tool</a></header>
+<main>
+<p class="eyebrow">Free working guide · HVAC, plumbing and home services · November 2026</p>
+<h1>Seven checks before following up on an open estimate.</h1>
+<p class="lead">An old quote is not necessarily a sales opportunity. First separate outstanding estimates from completed jobs, duplicate exports, expired quotes and records that cannot be contacted. This spreadsheet checklist makes those decisions explicit before anyone sends a message.</p>
+<p>No customer data is needed to use this guide. It is a manual review process, not legal advice, a CRM integration or an automated follow-up campaign.</p>
+<div class="panel">
+<strong>Already have a CSV export?</strong>
+<p>Use this checklist directly. For offline CSV mapping, five human-review queues and exportable review lists, the separate <a href="https://philipairlind-hub.github.io/danish-storefront-qa/quote-recovery/">Quote Recovery Workbench</a> is available for a one-time $19 payment on Gumroad.</p>
+<a class="button" href="https://philipairlind-hub.github.io/danish-storefront-qa/quote-recovery/">See the $19 offline workbench</a>
+<a class="button alt" href="https://lind-workbench-preview.philipairlind.chatgpt.site/Estimate-Review-Starter-Kit-v1.0.zip">Download free synthetic starter ZIP</a>
+<p class="small">The starter ZIP includes an example and blank template, not the paid workbench. The paid tool sends no customer messages.</p>
+</div>
+<h2>What to review in your estimate spreadsheet</h2>
+<ol>
+<li><strong>Keep a stable estimate ID.</strong> Preserve the original quote or estimate identifier so a review decision can be checked against the actual CRM or accounting record. Do not assume every spreadsheet row represents a different customer or job.</li>
+<li><strong>Separate open from closed statuses.</strong> Distinguish pending/open from won, declined, cancelled and completed. If the status is ambiguous, hold the record and confirm it in the source system instead of inventing a category.</li>
+<li><strong>Check estimate age and validity.</strong> Keep the original estimate date and any quote-expiration or validity field. An old quote may require a fresh price or availability check; never represent an expired quote as still binding.</li>
+<li><strong>Respect the next-action date.</strong> If a salesperson has already scheduled a future action, keep that record separate from an immediate review queue. Avoid duplicate or contradictory follow-ups from different staff.</li>
+<li><strong>Flag identical repeats.</strong> Exports can contain repeated estimate IDs or identical rows. Review them before treating them as additional opportunities. The same person can still have separate legitimate estimates.</li>
+<li><strong>Check contact restrictions first.</strong> Review opt-outs, relevant communication permissions, prior complaints and the applicable contact rules for the location and channel. Missing information is a reason for human verification, not an invitation to message everyone.</li>
+<li><strong>Assign a human owner and record the decision.</strong> For each unresolved estimate, document whether to review, hold, exclude, revisit later or investigate a duplicate. Keep a source reference and update the authoritative system only through an approved workflow.</li>
+</ol>
+<h2>Example of a minimal review file</h2>
+<p>Start with six useful fields. Exact column names and business rules vary by export. These rows are <strong>synthetic examples</strong>, not customer results.</p>
+<div class="scroll"><table>
+<thead><tr><th>estimate_id</th><th>status</th><th>estimate_date</th><th>next_action_date</th><th>valid_until</th><th>contact_permission</th></tr></thead>
+<tbody>
+<tr><td>EX-1001</td><td>open</td><td>2026-10-25</td><td>2026-11-15</td><td>2026-11-30</td><td>review_required</td></tr>
+<tr><td>EX-1002</td><td>won</td><td>2026-10-20</td><td></td><td>2026-11-20</td><td>do_not_contact</td></tr>
+<tr><td>EX-1003</td><td>unknown</td><td>2026-10-31</td><td></td><td>2026-11-30</td><td>unknown</td></tr>
+</tbody>
+</table></div>
+<p class="small">The examples demonstrate questions to investigate. They are not a universal classification specification, and they do not establish a lawful basis for marketing messages.</p>
+<h2>What a useful review produces</h2>
+<p>A good review should produce a shortlist that a person can assess, an exception list for unclear or missing records, and a traceable reason for each decision. The goal is a trustworthy list—not an inflated count of possible revenue.</p>
+<div class="panel">
+<h2 style="margin-top:0">Prefer the offline workbench?</h2>
+<p><strong>Quote Recovery Workbench — $19, one time.</strong> Download an HTML tool for current desktop Chrome or Edge. Map six fields in a UTF-8 estimate CSV, review five queues and export review CSVs. Files are processed locally; no CRM credentials, subscriptions, emails or texts are required.</p>
+<p class="small">One-business internal-use license. It does not guarantee recovered revenue or replace consent checks. The paid tool supports up to 10 MB and 20,000 input records under the stated file requirements.</p>
+<a class="button" href="https://lindworkbench.gumroad.com/l/quote-recovery-workbench" rel="noopener noreferrer">Buy Quote Recovery Workbench — $19</a>
+<a class="button alt" href="https://philipairlind-hub.github.io/danish-storefront-qa/quote-recovery/">Read the full product details</a>
+</div>
+<p class="small">Questions about a separately scoped manual estimate export audit? Contact <a href="mailto:shopairlind@gmail.com?subject=Quote%20Recovery%20manual%20review%20enquiry">shopairlind@gmail.com</a> before sending confidential exports.</p>
+</main>
+<footer>© 2026 Lind Workbench · <a href="https://philipairlind-hub.github.io/danish-storefront-qa/quote-recovery/">Product details</a> · <a href="mailto:shopairlind@gmail.com">Written enquiries</a></footer>
+</body>
+</html>
