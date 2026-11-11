@@ -20,6 +20,10 @@ The CSV tool flags unusual record widths, repeated SKU *candidates*, column-head
 - **SupplierPreflight from $49:** [Shopify new-product supplier-file preparation](https://www.upwork.com/services/product/admin-customer-support-a-shopify-import-csv-from-your-supplier-spreadsheet-with-a-qa-report-2117968533993668014), up to 100 variant rows/30 source columns/8 MiB in Starter. Output is a Shopify import candidate, exceptions, HTML QA report and source-level provenance. Buyer performs the actual import. No scraping, image hosting, inventory synchronization or overwriting existing products.
 - **General CSV/Excel QA from $99:** [Independent data QA service](https://www.upwork.com/services/product/development-it-an-audited-csv-or-excel-product-file-with-an-error-log-and-safe-fixes-2117654130963966547). Scope differs from SupplierPreflight.
 
+## Separate Lind Workbench product — offline estimate review
+
+- **Quote Recovery Workbench ($19 one time):** [Live independent product overview](https://philipairlind-hub.github.io/danish-storefront-qa/quote-recovery/) with a direct [Gumroad purchase route](https://lindworkbench.gumroad.com/l/quote-recovery-workbench), free synthetic starter kit and accurate limitations. This is a separate HVAC/plumbing/home-service product, not Shopify QA. The older ChatGPT Sites preview still has an outdated checkout notice; use the verified new overview or direct Gumroad page for buyers. Purchase and payout readiness are distinct; Gumroad PayPal Connect payout verification is pending.
+
 Written questions: shopairlind@gmail.com. Don't send confidential source or customer files before a data-handling agreement.
 
 ## Source and deployment
@@ -31,7 +35,7 @@ Written questions: shopairlind@gmail.com. Don't send confidential source or cust
 - \`test/\`: Danish page-scanner test suite; historical project documentation reported 14 checks.
 - \`docs/\`: requirements, QA notes and synthetic example documentation. Some documents are historical, not proof of orders.
 
-[Public sitemap, 4 verified URLs](https://philipairlind-hub.github.io/danish-storefront-qa/sitemap.xml). Update both source and public GitHub branches when editing the website, then independently verify the live page.
+[Public sitemap, 5 verified URLs](https://philipairlind-hub.github.io/danish-storefront-qa/sitemap.xml). Update both source and public GitHub branches when editing the website, then independently verify the live page.
 
 ## Limits and verification (11 November 2026)
 
@@ -39,4 +43,4 @@ The Danish language scanner is a limited machine pre-scan, not native Danish pro
 
 The separate CSV Quick Check has 12 logic checks passed for quoting, line endings, UTF-8 BOM, field widths, duplicate SKU candidates and basic price warnings. A synthetic-data DOM-script smoke test also passed: four records and three review findings. This is not a complete real-browser or Shopify-import acceptance test. Historical Danish scanner tests were not freshly rerun during this update.
 
-All four public pages and the sitemap were fetched after deployment. **No independently paid customer orders, claims of increased conversion, testimonials or certification are asserted.** This project is independent and is not endorsed by Shopify.
+The four Shopify QA pages and separate Quote Recovery overview were fetched after deployment; published SEO metadata does not establish search indexing or traffic. **No independently paid customer orders, claims of increased conversion, testimonials or certification are asserted.** This project is independent and is not endorsed by Shopify.
