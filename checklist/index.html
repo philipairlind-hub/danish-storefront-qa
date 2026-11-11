@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Danish Shopify Translation QA Checklist — 12 Checks Before Launch</title>
+<meta name="description" content="A practical 12-point checklist for checking an English-to-Danish Shopify store translation: theme strings, product pages, checkout, prices, emails and native tone. Free one-page scan and optional $49 review.">
+<link rel="canonical" href="https://philipairlind-hub.github.io/danish-storefront-qa/checklist/">
+<link rel="sitemap" type="application/xml" href="https://philipairlind-hub.github.io/danish-storefront-qa/sitemap.xml">
+<meta property="og:title" content="Danish Shopify Translation QA Checklist">
+<meta property="og:description" content="Twelve checks for Shopify teams launching a Danish-language storefront. Free public-page scan and optional native review.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://philipairlind-hub.github.io/danish-storefront-qa/checklist/">
+<style>
+:root{--paper:#f7f8f5;--ink:#172033;--muted:#536070;--line:#d8dfd8;--accent:#ac1833}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.7 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}main,footer{max-width:830px;margin:auto;padding:24px}header{border-bottom:1px solid var(--line);background:white}header nav{max-width:830px;margin:auto;padding:16px 24px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}a{color:var(--accent);text-underline-offset:3px}h1,h2,h3{line-height:1.2}h1{font-size:clamp(2rem,5vw,3rem);letter-spacing:-.03em;margin:.3em 0}h2{margin-top:2rem}p{margin:0 0 1.2rem}.eyebrow{font-size:.78rem;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:700}.lede{font-size:1.12rem}.panel{background:white;border:1px solid var(--line);border-radius:8px;padding:20px;margin:28px 0}.action{display:inline-block;background:var(--accent);color:white;padding:12px 18px;border-radius:6px;font-weight:700;text-decoration:none}.action:hover{background:#861029}.secondary{background:white;color:var(--accent);border:1px solid var(--accent)}ol{padding-left:1.5rem}li{margin:1.15rem 0;padding-left:.2rem}li strong{display:block}small,.muted{color:var(--muted)}.note{border-left:3px solid var(--accent);padding:10px 16px;background:#fff}footer{border-top:1px solid var(--line);color:var(--muted);font-size:.88rem}a:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+</style>
+</head>
+<body>
+<header><nav><strong>Danish Storefront QA</strong><a href="../">Free public-page language scanner</a></nav></header>
+<main>
+<p class="eyebrow">Practical guide · Shopify localization · Updated November 2026</p>
+<h1>Danish Shopify translation QA: a 12-point pre-launch checklist</h1>
+<p class="lede">Translating a Shopify store into Danish is not the same as verifying that Danish customers can understand and complete the shopping journey. Use this checklist to find what a basic automated translation or scanner may miss.</p>
+<p>For store owners, localization managers and international ecommerce agencies. This is a manual review framework, not a claim that your store has been inspected.</p>
+<div class="panel">
+<p class="eyebrow">Free first step</p>
+<h2>Scan one public Danish storefront page</h2>
+<p>The free scanner flags candidates such as leftover English or Swedish UI text and missing Danish theme keys on one public page. It cannot inspect your private checkout, customer emails, JavaScript-only content, or whether every Danish sentence sounds natural.</p>
+<p><a class="action" href="../">Open the free scanner</a></p>
+</div>
+<h2>What to check before your Danish launch</h2>
+<ol>
+<li><strong>1. Verify that Danish is actually published and assigned to the right market.</strong> Open the real Danish-language URL in a fresh browser session. Shopify can display default-language content wherever a translation is missing, so do not assume that publishing a language translated every field.</li>
+<li><strong>2. Check navigation and primary purchase buttons.</strong> Menu items, search, cart, discount entry, availability and add-to-cart calls to action should be correct Danish. A simple example: <em>Læg i kurv</em> is Danish; <em>Lägg i varukorg</em> is Swedish. Do not assume a scanner will recognize every contextual mistake.</li>
+<li><strong>3. Search for untranslated theme keys and placeholders.</strong> Look for strings such as <code>Translation missing: da...</code>, English fallback text, template tokens and untranslated default theme content. Inspect product, collection, empty cart and error states, not only the homepage.</li>
+<li><strong>4. Review money, separators and units.</strong> Confirm prices use the actual configured shop currency and local formatting. When displaying DKK, a typical Danish presentation is <em>199,95 kr.</em>; do not convert currencies or invent amounts merely to make a page look Danish. Check tax and delivery wording separately.</li>
+<li><strong>5. Check product-specific Danish wording.</strong> Inspect sizes, materials, units, variants, colors, care instructions and product claims. Prefer consistent terminology across collections and product pages. Do not silently change a legally or technically material specification.</li>
+<li><strong>6. Check menus, filters, search and dynamic overlays.</strong> Cookie dialogs, predictive search, variant pickers, app popups, product recommendations and other JavaScript-rendered content may be invisible to a simple HTML text scan.</li>
+<li><strong>7. Review cart and checkout in an approved test flow.</strong> Follow the Danish-language customer journey, including validation errors, shipping choices, address labels and order confirmation. Use test mode or authorized non-live test data; a public scanner does not test checkout.</li>
+<li><strong>8. Preview transactional emails in Danish.</strong> Check order confirmations, shipping updates, account flows and returns notifications. Shopify supports language-specific notification preview; verify the actual templates used by your store.</li>
+<li><strong>9. Review shipping and returns pages for understandable language.</strong> Confirm that customer-facing descriptions and links are present and clear. This checklist is not legal advice and does not certify compliance with Danish consumer or product-safety law.</li>
+<li><strong>10. Check links, accessibility strings and page metadata.</strong> Verify translated headings, visible labels, alt text, page titles and links. Automated flags in HTML attributes may not be visible to shoppers, but still deserve inspection.</li>
+<li><strong>11. Verify language URLs and international SEO behavior.</strong> Check the correct Danish page URL and canonical/alternate-language behavior. Shopify generally handles language URLs, hreflang and inclusion of published languages in sitemaps; confirm your actual setup rather than manually copying SEO tags blindly.</li>
+<li><strong>12. Have a native Danish speaker read the most important pages.</strong> Assess natural tone, trust, clarity and whether the text sounds like a Danish shop. Machine translation and an automated scanner cannot establish this on their own.</li>
+</ol>
+<h2>Prioritize what to fix</h2>
+<p>Start with problems that block an order or materially misstate a product, price or delivery term. Then correct clear customer-facing errors in checkout and core product pages. Cosmetic style differences can follow after the purchase path is comprehensible.</p>
+<div class="note"><strong>A useful issue-log row:</strong> Page URL · element · current Danish text · problem · severity · proposed wording · owner decision. Keep the original text and mark changes requiring a merchant or legal decision instead of guessing.</div>
+<div class="panel">
+<p class="eyebrow">Small paid review · first order</p>
+<h2>One Danish page, reviewed from $49</h2>
+<p>For one public Danish storefront page of up to 500 existing words, a native reviewer checks wording and returns prioritized issues plus suggested corrections. Three business days after written scope and payment confirmation; one first-order pilot per business. No full retranslation, legal review, admin login or checkout test.</p>
+<p><a class="action" href="mailto:shopairlind@gmail.com?subject=Danish%20QA%20one-page%20pilot%20%2449&body=Storefront%20URL%3A%0AApproximate%20word%20count%3A%0AWhat%20needs%20checking%3A">Request the $49 review by email</a></p>
+<p><small>For larger reviews and funded platform ordering, <a href="../">see the full packages</a>. This button requests a quote and does not charge a card.</small></p>
+</div>
+<h2>Primary Shopify references</h2>
+<p>These official guides explain Shopify's functionality; the review checklist and service are independent of Shopify.</p>
+<ul>
+<li><a href="https://help.shopify.com/en/manual/international/languages">Shopify Help: Localization and translation</a></li>
+<li><a href="https://help.shopify.com/en/manual/international/languages/checkout-and-notifications">Shopify Help: Checkout and notification translations</a></li>
+<li><a href="https://help.shopify.com/en/manual/international/languages/translate-adapt-app/automatic-translation">Shopify Help: Translate &amp; Adapt automatic translation</a></li>
+<li><a href="https://help.shopify.com/en/manual/international/languages/manage-languages">Shopify Help: Managing languages and language URLs</a></li>
+</ul>
+<h2>Can an automated scanner replace native QA?</h2>
+<p>No. It can help identify text candidates on the publicly available HTML of one page. It cannot reliably judge meaning, voice, the checkout workflow, hidden content, customer-specific locale variations or the wording of every external app. A human reviewer should make final editorial decisions.</p>
+</main>
+<footer>Independent Danish Storefront QA service by Philip Lind · Aarhus, Denmark · <a href="mailto:shopairlind@gmail.com">shopairlind@gmail.com</a> · <a href="../">Free scanner and services</a></footer>
+</body>
+</html>
