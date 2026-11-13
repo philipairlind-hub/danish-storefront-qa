@@ -1,0 +1,12 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Purchase order review — synthetic demonstration</title>
+<style>body{font:15px/1.6 system-ui;max-width:1100px;margin:30px auto;padding:0 16px}table{border-collapse:collapse;width:100%;font-size:14px}td,th{border-bottom:1px solid #ccd;padding:9px;text-align:left;vertical-align:top}th{background:#edf3fa}strong{color:#9b3422}code{word-break:break-word}</style>
+<h1>PO / goods receipt / supplier invoice — exception review</h1>
+<p><strong>REVIEW ONLY:</strong> This rules-based report does not approve payments, certify inventory, reconcile taxes/freight, or write to ERP/Shopify. Review source rows and mappings before decisions. The published example uses invented data.</p>
+<table><thead><tr><th>PO</th><th>SKU</th><th>Ordered</th><th>Received</th><th>Invoiced</th><th>Status</th><th>Exceptions</th><th>Source rows (PO / receipts / invoices)</th></tr></thead><tbody><tr><td>PO100</td><td>MATCH</td><td>6</td><td>6</td><td>6</td><td>MATCHED</td><td></td><td>2 / 2 / 2</td></tr>
+<tr><td>PO101</td><td>PARTIAL</td><td>10</td><td>8</td><td>8</td><td>REVIEW</td><td>PARTIAL_OR_MISSING_RECEIPT</td><td>3 / 3 / 3</td></tr>
+<tr><td>PO102</td><td>PRICE</td><td>5</td><td>5</td><td>5</td><td>REVIEW</td><td>PRICE_VARIANCE</td><td>4 / 4 / 4</td></tr>
+<tr><td>PO103</td><td>PREBILL</td><td>3</td><td>0</td><td>3</td><td>REVIEW</td><td>PARTIAL_OR_MISSING_RECEIPT; INVOICED_OVER_RECEIPTED</td><td>5 /  / 5</td></tr>
+<tr><td>PO104</td><td>NOINV</td><td>4</td><td>4</td><td>0</td><td>REVIEW</td><td>MISSING_INVOICE; RECEIVED_NOT_FULLY_INVOICED</td><td>6 / 5 / </td></tr>
+<tr><td>PO105</td><td>OVERBILL</td><td>2</td><td>2</td><td>3</td><td>REVIEW</td><td>INVOICED_OVER_RECEIPTED; INVOICED_OVER_ORDERED</td><td>7 / 6 / 6</td></tr>
+<tr><td>PO999</td><td>UNKNOWN</td><td>0</td><td>0</td><td>1</td><td>REVIEW</td><td>UNKNOWN_PO_LINE</td><td> /  / 7</td></tr></tbody></table></html>

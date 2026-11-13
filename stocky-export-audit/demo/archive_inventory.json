@@ -1,0 +1,29 @@
+{
+  "synthetic_demo": false,
+  "limitations": "CSV only; data-presence and shape checks, not historical completeness or Shopify import compatibility",
+  "files": [
+    {
+      "file": "synthetic_stocky_archive.csv",
+      "sha256": "8fd8e03f4c52e60164201a28afdea29091da5874a816a1c33038516ad86097ff",
+      "bytes": 114,
+      "rows": 4,
+      "columns": [
+        "PO Number",
+        "SKU",
+        "Cost",
+        "Received Qty"
+      ],
+      "column_count": 4,
+      "width_counts": {
+        "4": 4
+      },
+      "empty_values_by_column": {
+        "Cost": 1
+      },
+      "exact_duplicate_rows": 1,
+      "review_flags": [
+        "EXACT_DUPLICATE_DATA_ROWS"
+      ]
+    }
+  ]
+}
