@@ -10,13 +10,14 @@ Independent ecommerce QA utilities and fixed-scope services by Philip Lind, Aarh
 | Danish Shopify launch checklist | [Read 12-point checklist](https://philipairlind-hub.github.io/danish-storefront-qa/checklist/) | Manual pre-launch review of language, pricing, theme strings, checkout and emails |
 | Supplier spreadsheet import guide | [Read 10-point checklist](https://philipairlind-hub.github.io/danish-storefront-qa/supplier-file-qa/) | New-product import preparation, variants, SKUs, prices and exceptions |
 | Supplier CSV Quick Check | [Check a CSV locally](https://philipairlind-hub.github.io/danish-storefront-qa/csv-check/) | Free client-side CSV structure check; no upload, account or analytics. Maximum 3 MiB and 10,000 data records |
+| HVAC estimate follow-up review checklist | [Read 7-step review process](https://philipairlind-hub.github.io/danish-storefront-qa/hvac-estimate-follow-up-checklist/) | Human-led CSV review checks and synthetic example; separate from the paid offline quote tool |
 
 The CSV tool flags unusual record widths, repeated SKU *candidates*, column-heading problems and basic price-format issues. **It does not certify Shopify import readiness.** A CSV with zero warnings can still be unsafe to import.
 
 ## Existing paid buyer routes
 
 - **Danish native QA $49 first-order pilot:** One public page, up to 500 existing words, prioritized wording findings and corrections, within 3 business days after scope/payment agreement. [Request through the main site](https://philipairlind-hub.github.io/danish-storefront-qa/). This $49 button opens a written inquiry; it is **not an instant card checkout**.
-- **Danish Entry $95 / Core $350:** [Contra Entry service](https://contra.com/s/67lEQPZ2-native-danish-review-of-your-ai-translated-store), or [Upwork tiered service](https://www.upwork.com/services/product/2116240404745706041). Entry covers up to 1,500 existing words; Core up to 5,000. Terms and payments follow the chosen provider.
+- **Danish Entry $95 / Core $350:** [Contra Entry service](https://contra.com/s/67lEQPZ2-native-danish-review-of-your-ai-translated-store), or [Upwork tiered service](https://www.upwork.com/services/product/2116240404745706041). For independently sourced direct customers *after written scope agreement*, existing Stripe checkout links are [Entry $95](https://buy.stripe.com/8x2aEZ2yiail4MH72Cg7e01) and [Core $350](https://buy.stripe.com/28EfZj4Gq9eh3IDbiSg7e02). Entry covers up to 1,500 existing words; Core up to 5,000. Do not pay until scope, storefront URLs, deliverables and delivery have been agreed in writing. Marketplace-origin orders remain on their respective platforms.
 - **SupplierPreflight from $49:** [Shopify new-product supplier-file preparation](https://www.upwork.com/services/product/admin-customer-support-a-shopify-import-csv-from-your-supplier-spreadsheet-with-a-qa-report-2117968533993668014), up to 100 variant rows/30 source columns/8 MiB in Starter. Output is a Shopify import candidate, exceptions, HTML QA report and source-level provenance. Buyer performs the actual import. No scraping, image hosting, inventory synchronization or overwriting existing products.
 - **General CSV/Excel QA from $99:** [Independent data QA service](https://www.upwork.com/services/product/development-it-an-audited-csv-or-excel-product-file-with-an-error-log-and-safe-fixes-2117654130963966547). Scope differs from SupplierPreflight.
 
@@ -35,7 +36,7 @@ Written questions: shopairlind@gmail.com. Don't send confidential source or cust
 - \`test/\`: Danish page-scanner test suite; historical project documentation reported 14 checks.
 - \`docs/\`: requirements, QA notes and synthetic example documentation. Some documents are historical, not proof of orders.
 
-[Public sitemap, 5 verified URLs](https://philipairlind-hub.github.io/danish-storefront-qa/sitemap.xml). Update both source and public GitHub branches when editing the website, then independently verify the live page.
+[Public sitemap, 6 verified URLs](https://philipairlind-hub.github.io/danish-storefront-qa/sitemap.xml). Update both source and public GitHub branches when editing the website, then independently verify the live page.
 
 ## Limits and verification (11 November 2026)
 
