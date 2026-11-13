@@ -1,0 +1,43 @@
+{
+  "mapping_version": 1,
+  "name": "Synthetic first-sale demonstration; explicit agreed mapping",
+  "input": {
+    "sheet": null,
+    "decimal": "comma"
+  },
+  "product_key": "Group",
+  "handle": {
+    "column": "Name",
+    "slugify": true
+  },
+  "product": {
+    "Title": {
+      "column": "Name"
+    },
+    "Status": {
+      "constant": "draft"
+    }
+  },
+  "options": [
+    {
+      "name": "Size",
+      "column": "Size"
+    },
+    {
+      "name": "Colour",
+      "column": "Colour"
+    }
+  ],
+  "variant": {
+    "SKU": {
+      "column": "SKU"
+    },
+    "Price": {
+      "column": "Price",
+      "number": "price"
+    }
+  },
+  "exclude_products": {
+    "BAG": "Operator review: missing selling price on one variant. Hold back the whole product; customer must supply it. No price invented."
+  }
+}

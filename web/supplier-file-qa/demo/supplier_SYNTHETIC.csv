@@ -1,0 +1,11 @@
+Group,Name,Size,Colour,SKU,Price
+TEE,Everyday Tee,S,Navy,000101,"19,95"
+TEE,Everyday Tee,M,Navy,000102,"19,95"
+HOOD,Everyday Hoodie,S,Grey,000201,"49,50"
+HOOD,Everyday Hoodie,M,Grey,000202,"49,50"
+CAP,Canvas Cap,,Black,000301,"15,00"
+CAP,Canvas Cap,L,Black,000302,"15,00"
+SOCK,Cotton Socks,M,White,000401,"8,00"
+SOCK,Cotton Socks,M,White,000402,"8,00"
+BAG,Canvas Bag,One size,Natural,000501,
+BAG,Canvas Bag,One size,Black,000502,"25,00"
