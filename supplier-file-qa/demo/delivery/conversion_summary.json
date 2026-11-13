@@ -1,0 +1,77 @@
+{
+  "tool": {
+    "name": "CSV QA Engine supplier mapping",
+    "version": "1.1.0"
+  },
+  "processed_at": "2026-11-09T08:22:23+00:00",
+  "input": {
+    "filename": "supplier_SYNTHETIC.csv",
+    "sheet": null,
+    "format": "csv",
+    "sha256_before": "6ba9033fec36b811efb161c9761037b8bdb17b8b967a6983fd63f74ef66b509e",
+    "sha256_after": "6ba9033fec36b811efb161c9761037b8bdb17b8b967a6983fd63f74ef66b509e",
+    "unchanged": true
+  },
+  "mapping": {
+    "file": "delivery_mapping.json",
+    "name": "Synthetic first-sale demonstration; explicit agreed mapping",
+    "sha256": "5aa1366970fffd7f32943e64233200734a645e1a0c40ed41801c234935faa71e",
+    "unmapped_source_columns": []
+  },
+  "conversion": {
+    "products_converted": 2,
+    "products_held_back": 3,
+    "output_rows": 4,
+    "output_columns": [
+      "Title",
+      "URL handle",
+      "Status",
+      "SKU",
+      "Option1 name",
+      "Option1 value",
+      "Option2 name",
+      "Option2 value",
+      "Price"
+    ],
+    "exceptions": {
+      "HELD_BACK:duplicate_variant": 1,
+      "HELD_BACK:excluded_by_operator": 2,
+      "HELD_BACK:missing_option_value": 1,
+      "HELD_BACK:product_held_back": 2
+    },
+    "csv_cells_formula_escaped": 0
+  },
+  "verification": {
+    "read_back_identical": true,
+    "every_filled_cell_has_lineage": true,
+    "source_rows": 10,
+    "converted_rows": 4,
+    "held_back_rows": 6,
+    "every_source_row_accounted_once": true
+  },
+  "shopify_review": {
+    "folder": "qa",
+    "import_setting_overwrite": "no",
+    "store_export": null,
+    "open_items": 1,
+    "by_class": {
+      "UNKNOWN_OR_NOT_VERIFIED": 1
+    }
+  },
+  "delivery_status": {
+    "status": "READY_FOR_CONTROLLED_IMPORT_TEST",
+    "meaning": "The available checks passed and the operator recorded a review. Suitable for a controlled test import (a development store, or a few products with a backup). Shopify's acceptance and the effect on a live store are NOT guaranteed.",
+    "reasons": [
+      "All automated checks passed and the operator recorded a review. This is not proof that a live-store import is safe."
+    ],
+    "accepted_conditions": [
+      "No store export: accepted because the import will not overwrite (Shopify ignores rows whose handle already exists in the store).",
+      "3 product(s) (6 source rows, 6 exception records) were held back and are not in the file: accepted by the operator; they go back to the customer with exceptions.csv."
+    ],
+    "operator_reviewed": true,
+    "acknowledged_categories": [],
+    "held_back_accepted": true,
+    "import_ready_claimed": false,
+    "live_store_safety_claimed": false
+  }
+}

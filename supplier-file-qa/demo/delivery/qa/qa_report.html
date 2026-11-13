@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shopify Pre-Import Risk Review – shopify_products.csv</title>
+<style>
+:root { --ink:#1d2733; --muted:#5b6b7c; --line:#d9e0e7; --bg:#f5f7fa; --brand:#1f3a5f;
+        --err:#b42318; --err-bg:#fdecea; --warn:#9a6700; --warn-bg:#fff4d6;
+        --info:#175cd3; --info-bg:#eaf2ff; --ok:#067647; --ok-bg:#e7f6ec; }
+* { box-sizing: border-box; }
+body { margin:0; font:15px/1.5 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+       color:var(--ink); background:var(--bg); }
+.page { max-width:1100px; margin:0 auto; padding:32px 24px 64px; }
+header { background:var(--brand); color:#fff; padding:28px 32px; border-radius:10px; }
+header h1 { margin:0 0 4px; font-size:26px; }
+header .meta { opacity:.85; font-size:14px; }
+section { background:#fff; border:1px solid var(--line); border-radius:10px; padding:20px 24px;
+          margin-top:20px; }
+h2 { margin:0 0 12px; font-size:19px; color:var(--brand); }
+p.lead { margin:0 0 6px; font-size:16px; }
+.muted { color:var(--muted); font-size:13px; }
+.cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; }
+.card { border:1px solid var(--line); border-radius:8px; padding:12px 14px; }
+.card .n { font-size:26px; font-weight:700; }
+.card .l { color:var(--muted); font-size:13px; }
+table { width:100%; border-collapse:collapse; font-size:14px; }
+th, td { text-align:left; padding:7px 9px; border-bottom:1px solid var(--line); vertical-align:top; }
+th { background:#f0f3f7; font-weight:600; }
+td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
+.badge { display:inline-block; padding:1px 8px; border-radius:10px; font-size:12px; font-weight:600; }
+.b-error { background:var(--err-bg); color:var(--err); }
+.b-warning { background:var(--warn-bg); color:var(--warn); }
+.b-info { background:var(--info-bg); color:var(--info); }
+.b-pass { background:var(--ok-bg); color:var(--ok); }
+.b-unknown { background:#efeaf8; color:#5b3e96; }
+.callout { border-left:4px solid var(--brand); background:#f0f3f7; padding:10px 14px; margin:10px 0; }
+.b-fail { background:var(--err-bg); color:var(--err); }
+.banner { border-radius:8px; padding:14px 16px; margin-bottom:12px; }
+.banner.ok { background:var(--ok-bg); } .banner.warn { background:var(--warn-bg); }
+.banner.err { background:var(--err-bg); }
+.bar { height:8px; background:var(--brand); border-radius:4px; min-width:2px; }
+code, .val { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size:13px;
+             white-space:pre-wrap; overflow-wrap:anywhere; }
+td code { white-space:nowrap; }
+ul { margin:6px 0; padding-left:20px; }
+@media print { body { background:#fff; } section, header { break-inside:avoid; }
+               header { color:#000; background:#fff; border:2px solid var(--brand); } }
+</style></head><body><div class="page">
+<header><h1>Shopify Pre-Import Risk Review</h1>
+<div class="meta">shopify_products.csv<br>Processed 2026-11-09T08:22:23+00:00 (UTC) &middot;
+CSV QA Engine 1.1.0</div></header>
+<section><h2>About this review</h2>
+<p class="lead">This report reviews one product file <strong>before</strong> it is imported into
+Shopify. It was produced by automated checks and is meant to be read together with your operator's
+review notes.</p>
+<ul>
+<li><span class="badge b-error">Confirmed file error</span> the file itself breaks a documented Shopify rule or is
+objectively invalid. Fix before importing.</li>
+<li><span class="badge b-warning">Import risk - needs review</span> a documented risk whose effect depends on your store or
+on how you import. A person must decide.</li>
+<li><span class="badge b-unknown">Cannot be verified from this file</span> cannot be decided from this file alone (for example
+without a current export of your store).</li>
+</ul>
+<div class="callout">This review did not connect to Shopify and did not import anything. It cannot
+guarantee that Shopify will accept the file or that an import will have no side effects, and it does
+not replace a person's review before import.</div></section>
+<section><h2>Summary</h2>
+<div class="cards">
+<div class="card"><div class="n">0</div><div class="l">Confirmed file errors</div></div>
+<div class="card"><div class="n">0</div><div class="l">Import risks to review</div></div>
+<div class="card"><div class="n">1</div><div class="l">Cannot be verified</div></div>
+<div class="card"><div class="n">4</div><div class="l">Rows in file</div></div>
+</div><p></p>
+<table><tr><th>Review order</th><th>What it covers</th><th class="num">Open items</th></tr><tr><td>Priority 1</td><td>Potentially destructive or import-blocking</td><td class='num'>1</td></tr><tr><td>Priority 2</td><td>Missing identifiers and ambiguous variants</td><td class='num'>0</td></tr><tr><td>Priority 3</td><td>Pricing and inventory</td><td class='num'>0</td></tr><tr><td>Priority 4</td><td>Other data quality improvements</td><td class='num'>0</td></tr></table>
+<p class="muted">Every row of the file is accounted for in the delivered files
+(RECONCILED); see “Reconciliation”
+below. Original file SHA-256: <code>98cd07f7576a39b0566faf3774d7661971778a783b2dd0947516db846e5373e3</code></p>
+</section>
+<section><h2>File type and assumptions</h2><table><tr><td style='width:220px'>Detected file type</td><td><strong>Shopify product CSV</strong><br><span class='muted'>9 of 9 column names match Shopify&#x27;s product CSV template; Title and URL handle present. Detection uses the header row only; it is not a validation by Shopify.</span></td></tr><tr><td style='width:220px'>Column names</td><td>current Shopify template names</td></tr><tr><td style='width:220px'>Import setting assumed</td><td>Operator recorded: the import will not overwrite; products with existing handles are ignored by Shopify.</td></tr><tr><td style='width:220px'>Current store export compared</td><td>Not supplied – changes to existing products, options and variants were not checked.</td></tr><tr><td style='width:220px'>Products in this file</td><td>2 products (2 with several variants), 4 variant rows, 0 image-only rows. Repeated handles on variant and image rows are normal and are not treated as duplicates.</td></tr></table></section>
+<section><h2>Review before import (1 open items)</h2>
+<p class="muted">Work from priority 1 down. Row numbers are the rows of the original file as opened
+in a spreadsheet program (header = row 1); “—” means the finding is
+about a whole column or the whole file. Nothing listed here was changed automatically.</p>
+<h3>Priority 1 – Potentially destructive or import-blocking (1)</h3><table><tr><th class='num'>Row</th><th>Column</th><th>Confidence</th><th>Finding and why it was flagged</th><th>Original value</th><th>Safe action</th></tr><tr><td class='num'>—</td><td>—</td><td><span class="badge b-unknown">Cannot be verified from this file</span></td><td><strong>No current store export supplied</strong><br>No current product export from the store was supplied, so changes to existing option names, option values and variants were not checked. Shopify documents that changing option values deletes and recreates variant IDs.</td><td><span class="muted">(empty)</span></td><td>Ask the customer for a fresh product CSV export from Shopify admin and re-run the review with it.</td></tr></table><h3>Priority 2 – Missing identifiers and ambiguous variants (0)</h3><p class='muted'>None.</p><h3>Priority 3 – Pricing and inventory (0)</h3><p class='muted'>None.</p><h3>Priority 4 – Other data quality improvements (0)</h3><p class='muted'>None.</p></section>
+<section><h2>Checks performed and not performed</h2>
+<h3>Performed</h3><ul><li>File type detection (Shopify product CSV, inventory CSV, other spreadsheet) from the header row</li><li>Shopify column names (current and legacy template names): required, misspelled, differently spelled, duplicated and unrecognised columns</li><li>URL handles: missing, invalid characters, a product&#x27;s rows split up, rows that cannot be linked to a product (repeated handles for variants and images are allowed)</li><li>Titles and product details across a product&#x27;s rows (blank product columns on variant and image rows are allowed)</li><li>Options and variants: missing option names or values, duplicate option names, duplicate variants</li><li>Prices: valid number, negative, zero, decimals, plain-number format, compare-at price against price</li><li>Identifiers: missing and duplicate SKUs, SKU format, possible lost leading zeros; Barcodes lists (semicolon-separated, escapes, 20-barcode limit, type prefixes, GS1 checks for entries typed gtin/upc only), Barcode and Barcodes in one file, check digits in the older single-barcode columns</li><li>Image URLs (text only: https, spaces, credentials, local paths) and the 250-image limit</li><li>Inventory: linked tracker/policy/fulfillment columns, whole-number quantities, quantities on untracked variants</li><li>Documented values for Published, Status (and a value in every product&#x27;s Status when the column is included), Gift card, Requires shipping, Charge tax, inventory tracker/policy, weight unit and packed dimension unit</li><li>Packed product dimensions: all four or none per variant, length/width/height positive and below 2,000,000,000, saved dimensions cleared by blank cells or by Requires shipping = FALSE</li><li>Metafield and Option LinkedTo columns with values (need store definitions or a product category)</li><li>Collection column: 255-character limit; collections that may be created</li><li>Formula-like values (spreadsheet safety) and their effect on cleaned.csv</li></ul>
+<h3>Not performed or not verifiable</h3><ul><li>Live validation in Shopify: the file was not uploaded to or imported into any store.</li><li>Changes to existing products, options and variants: no current store export was supplied.</li><li>Image URLs were not opened: whether they exist, are public, and are valid images of an accepted size is unknown.</li><li>Metafield, market price, Google Shopping and Option LinkedTo columns are recognised, but their values are not validated, and the store&#x27;s metafield definitions and product categories cannot be seen (filled metafield and LinkedTo columns are reported as risks). Variant metafield columns are reported because Shopify&#x27;s product CSV does not support them.</li><li>Whether the named collections exist in the store, and whether barcode types other than gtin and upc are accepted by the CSV importer.</li><li>Whether every alternative column spelling (current or legacy name) is accepted by Shopify&#x27;s live importer.</li><li>Plan-specific and variant-count limits, product category values, tax codes, theme templates and location names.</li><li>Commercial correctness: prices, supplier data, and whether barcodes belong to the products.</li></ul></section>
+<section><h2>Assumptions this review does not make</h2><ul><li>That Shopify will accept this file or that the import will have no side effects.</li><li>That products or variants missing from this file should be deleted from the store.</li><li>That a repeated URL handle is a duplicate product (repeated handles are normal for variants and images).</li><li>That a blank cell and an omitted column have the same effect (they do not with overwrite).</li><li>That a valid barcode check digit proves the barcode belongs to the product.</li><li>That supplier prices, stock levels or descriptions are correct.</li><li>That this automated review replaces a person&#x27;s review before import.</li></ul>
+<h3>Shopify import limitations</h3><ul><li>Rules reflect Shopify&#x27;s documentation as reviewed on 2026-10-29. Shopify can change its importer and templates at any time.</li><li>With &#x27;Overwrite products with matching handles&#x27;, blank values in included columns overwrite store values; columns that are not included keep store values. Without overwrite, products with existing handles are ignored.</li><li>Changing option values deletes and recreates variant IDs; apps, feeds and integrations that refer to variant IDs can break.</li><li>Product CSVs and inventory CSVs are separate imports. The product CSV&#x27;s inventory quantity applies to single-location stores.</li><li>Shopify downloads images from public https URLs during import; this review did not open them.</li><li>This review does not produce an import-approved file. cleaned.csv is a review copy: when formula-like values were made spreadsheet-safe (leading apostrophe) it must not be imported as it is. Shopify imports CSV files, not Excel files; do not open and re-save a CSV in Excel (identifiers and leading zeros can change).</li><li>Back up the store&#x27;s products (product export) and test the import with a few products first.</li></ul></section>
+<section><h2>Rules behind these findings</h2>
+<p class="muted">“documented” = stated in Shopify's documentation; “inferred” = follows from documented
+behaviour; “heuristic” = a data-quality judgement of this review, not a Shopify rule. Documentation
+reviewed on 2026-10-29.</p>
+<table><tr><th style="width:18%">Finding</th><th style="width:36%">Basis</th><th>Evidence</th>
+<th style="width:34%">Source</th></tr><tr><td>No current store export supplied</td><td>Changing option values deletes existing variant IDs and creates new ones; only a comparison with current store data can show such changes.</td><td>documented</td><td>Shopify Help Center: Using CSV files to import and export products<br><span class='val muted'>https://help.shopify.com/en/manual/products/import-export/using-csv</span></td></tr></table>
+</section>
+<section><h2>Human review</h2><p>This report is a working document for a person's
+review. It does not record an approval. Before anything is imported, the operator and the customer
+should go through the priority 1 items, confirm the import setting, and test the import with a few
+products after exporting a backup of the store's products.</p></section>
+<section><h2>Result</h2>
+<div class="banner warn"><p class="lead"><strong>No objective errors were found, but some items need a human decision.</strong></p>
+0 of 4 rows (0.0%) have at least one
+error or warning; 0 rows still have open items after cleaning.
+4 rows passed all automated checks.</div>
+<p class="muted">Passing the automated checks means none of the problems listed in this report were
+detected. It does not prove that the data is correct or complete. See “Limitations” below.</p>
+<div class="cards">
+<div class="card"><div class="n">4</div><div class="l">Input rows</div></div>
+<div class="card"><div class="n">4</div><div class="l">Output rows</div></div>
+<div class="card"><div class="n">0</div><div class="l">Flagged rows</div></div>
+<div class="card"><div class="n">0</div><div class="l">Errors</div></div>
+<div class="card"><div class="n">1</div><div class="l">Warnings (review)</div></div>
+<div class="card"><div class="n">0</div><div class="l">Cells changed</div></div>
+</div></section>
+<section><h2>Reconciliation <span class="badge b-pass">RECONCILED</span></h2>
+<p class="muted">Every source row is accounted for. Flagged rows overlap with the other counts.</p>
+<table><tr><th>Count</th><th class="num">Rows</th><th>Meaning</th></tr><tr><td>Rows processed (input)</td><td class='num'>4</td><td class='muted'>Data rows read from the file (header and trailing blank rows not counted).</td></tr><tr><td>Rows in output</td><td class='num'>4</td><td class='muted'>Rows written to cleaned.csv / cleaned.xlsx.</td></tr><tr><td>Rows excluded</td><td class='num'>0</td><td class='muted'>Rows left out because an exclusion option was switched on. Default: none.</td></tr><tr><td>Rows unchanged</td><td class='num'>4</td><td class='muted'>Output rows where every value is identical to the source.</td></tr><tr><td>Rows normalized</td><td class='num'>0</td><td class='muted'>Output rows where at least one value was changed by an enabled cleaning rule (see transformations).</td></tr><tr><td>Rows flagged</td><td class='num'>0</td><td class='muted'>Rows with at least one error or warning found in the source. Overlaps with unchanged/normalized/excluded; not mutually exclusive.</td></tr><tr><td>Rows still needing review</td><td class='num'>0</td><td class='muted'>Flagged rows that still have at least one open error or warning (not auto-corrected, not excluded).</td></tr></table>
+<p></p><table><tr><th>Control</th><th>Result</th></tr><tr><td>input rows = output rows + excluded rows</td><td><span class="badge b-pass">PASS</span></td></tr><tr><td>output rows = unchanged rows + normalized rows</td><td><span class="badge b-pass">PASS</span></td></tr><tr><td>every changed value is recorded in the change log</td><td><span class="badge b-pass">PASS</span></td></tr><tr><td>every source row appears exactly once (in output or excluded)</td><td><span class="badge b-pass">PASS</span></td></tr><tr><td>cleaned.csv contains every output row (verified by re-reading the file)</td><td><span class="badge b-pass">PASS</span></td></tr><tr><td>cleaned.xlsx contains every output row in source order (verified by re-reading)</td><td><span class="badge b-pass">PASS</span></td></tr><tr><td>issues.csv and issues.xlsx contain every issue (verified by re-reading)</td><td><span class="badge b-pass">PASS</span></td></tr><tr><td>input file unchanged (SHA-256, size and modification time)</td><td><span class="badge b-pass">PASS</span></td></tr></table></section>
+<section><h2>Issues found (1)</h2>
+<table><tr><th>Severity</th><th class="num">Issues</th><th></th></tr><tr><td><span class="badge b-error">error</span></td><td class='num'>0</td><td class='muted'>Objective problems to fix before use.</td></tr><tr><td><span class="badge b-warning">warning</span></td><td class='num'>1</td><td class='muted'>Possible problems; a person should decide.</td></tr><tr><td><span class="badge b-info">info</span></td><td class='num'>0</td><td class='muted'>Notes, no action strictly required.</td></tr></table><p></p>
+<table><tr><th>Category</th><th>Severity</th><th>Type</th><th class="num">Count</th><th></th></tr><tr><td><strong>No current store export supplied</strong><br><span class='muted'>Without a current product export from the store, changes to existing products, options and variants cannot be checked.</span></td><td><span class="badge b-warning">warning</span></td><td>unverified</td><td class='num'>1</td><td style='width:120px'><div class='bar' style='width:100%'></div></td></tr></table>
+<p class="muted">Type “objective” = verifiable fact; “judgment” = needs a human decision;
+“note” = information; “unverified” = cannot be decided from this file alone.
+The full list is in issues.xlsx / issues.csv.</p></section>
+<section><h2>Duplicates</h2><table><tr><th>Finding</th><th class='num'>Count</th></tr><tr><td>Rows identical to an earlier row</td><td class='num'>0</td></tr><tr><td>Rows that match an earlier row except case/whitespace</td><td class='num'>0</td></tr><tr><td>SKU values used more than once</td><td class='num'>0</td></tr><tr><td>Rows sharing a SKU with another row</td><td class='num'>0</td></tr><tr><td>Rows whose SKU differs from another only by case/whitespace</td><td class='num'>0</td></tr></table><p class='muted'>Duplicates are never merged or deleted automatically.</p></section>
+<section><h2>Applied transformations</h2><p>No cleaning rules were enabled. Data values in the cleaned files are identical to the source.</p><p class='muted'>Output safety: in cleaned.csv, 0 value(s) starting with a formula character were prefixed with an apostrophe so spreadsheet programs treat them as text. In the .xlsx files all values are stored as text cells and are never executed as formulas.</p></section>
+<section><h2>Columns and settings</h2>
+<table><tr><th>Role</th><th>Column(s)</th></tr><tr><td>SKU column</td><td>SKU</td></tr><tr><td>Product name column</td><td><span class='muted'>not set</span></td></tr><tr><td>Price column(s)</td><td>Price</td></tr><tr><td>Identifier columns (never rewritten)</td><td>URL handle, SKU</td></tr><tr><td>EAN/GTIN columns</td><td><span class='muted'>not set</span></td></tr><tr><td>Other numeric columns</td><td><span class='muted'>not set</span></td></tr><tr><td>Required columns</td><td><span class='muted'>not set</span></td></tr><tr><td>Duplicate key columns</td><td><span class='muted'>not set</span></td></tr></table>
+<p class="muted">Column roles not set by configuration were detected from header names; please
+confirm they are correct.</p><ul><li>Decimal convention: dot</li><li>Trim whitespace (non-identifier columns): off</li><li>Trim whitespace (identifier columns): off</li><li>Normalize blank placeholders: off</li><li>Normalize decimals: off</li><li>Exclude blank rows: off</li></ul></section>
+<section><h2>Input file and integrity</h2><table>
+<tr><td>File</td><td>shopify_products.csv (CSV, 304 bytes)</td></tr>
+
+<tr><td>Encoding / delimiter</td><td>utf-8 / <code>&#x27;,&#x27;</code></td></tr>
+<tr><td>Columns (9)</td><td>Title, URL handle, Status, SKU, Option1 name, Option1 value, Option2 name, Option2 value, Price</td></tr>
+<tr><td>SHA-256 before</td><td><code>98cd07f7576a39b0566faf3774d7661971778a783b2dd0947516db846e5373e3</code></td></tr>
+<tr><td>SHA-256 after</td><td><code>98cd07f7576a39b0566faf3774d7661971778a783b2dd0947516db846e5373e3</code></td></tr>
+<tr><td>Original file modified?</td><td>No</td></tr>
+</table><ul><li>Delimiter auto-detected as comma.</li></ul></section>
+<section><h2>Limitations</h2><ul><li>Automated checks only find the problem types listed in this report. A row without flags has passed these checks; it has not been proven correct.</li><li>Nothing is verified against external sources (supplier data, barcode registries, the live shop). An EAN/GTIN with a valid check digit is not necessarily registered to this product.</li><li>Prices are checked as numbers (valid, not negative, not zero, at most two decimals); they are not checked for commercial plausibility.</li><li>Identifiers that were already damaged before the file reached this tool (lost leading zeros, scientific notation) cannot be restored; they are only flagged.</li><li>Excel formulas are never executed. The value Excel last saved is used. Excel display formatting (currency, percent, custom date formats) is not reproduced, except zero-padded number formats such as 00000; dates are written as YYYY-MM-DD.</li><li>Duplicate, capitalization and lost-leading-zero findings marked &#x27;judgment&#x27; are heuristics that need a person to decide.</li><li>Files that are not UTF-8 must be given an explicit --encoding; the tool does not guess encodings.</li></ul></section>
+<section><h2>Delivered files</h2><table><tr><td><code>cleaned.csv</code></td><td>Review copy in the original column order; its values are identical to the reviewed data. It is not validated or approved by Shopify: use it for an import only after the review above and a test import with a few products.</td></tr><tr><td><code>cleaned.xlsx</code></td><td>Same data with a source_row column, plus a Changes sheet (every changed value with its original) and an Excluded rows sheet if any.</td></tr><tr><td><code>issues.csv / issues.xlsx</code></td><td>Every finding with row, column, severity, original value and suggested action.</td></tr><tr><td><code>summary.json</code></td><td>Machine-readable summary of this report.</td></tr><tr><td><code>qa_report.html</code></td><td>This report.</td></tr></table></section></div></body></html>

@@ -1,0 +1,7 @@
+﻿exception_id,severity,code,source_row,source_column,product_key,source_value,details
+1,HELD_BACK,missing_option_value,6,Size,CAP,,The variant has no value for option 'Size'.
+2,HELD_BACK,product_held_back,7,Group,CAP,CAP,Held back with its product because another row of the product has a problem (a product is converted completely or not at all).
+3,HELD_BACK,product_held_back,8,Group,SOCK,SOCK,Held back with its product because another row of the product has a problem (a product is converted completely or not at all).
+4,HELD_BACK,duplicate_variant,9,Size,SOCK,M / White,Same option values as source row 8.
+5,HELD_BACK,excluded_by_operator,10,Group,BAG,BAG,Excluded in the mapping by the operator: Operator review: missing selling price on one variant. Hold back the whole product; customer must supply it. No price invented.
+6,HELD_BACK,excluded_by_operator,11,Group,BAG,BAG,Excluded in the mapping by the operator: Operator review: missing selling price on one variant. Hold back the whole product; customer must supply it. No price invented.

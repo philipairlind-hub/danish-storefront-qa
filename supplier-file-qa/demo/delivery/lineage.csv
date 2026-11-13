@@ -1,0 +1,29 @@
+﻿output_row,shopify_column,source_row,source_column,source_value,output_value,transform
+2,URL handle,2,Name,Everyday Tee,everyday-tee,"slug (lowercase ASCII letters, digits and hyphens)"
+2,Title,2,Name,Everyday Tee,Everyday Tee,copy
+2,Status,,,,draft,constant from mapping
+2,Option1 name,,,,Size,option name from mapping
+2,Option1 value,2,Size,S,S,copy
+2,Option2 name,,,,Colour,option name from mapping
+2,Option2 value,2,Colour,Navy,Navy,copy
+2,SKU,2,SKU,000101,000101,copy
+2,Price,2,Price,"19,95",19.95,"number (Decimal, dot decimal, digits kept)"
+3,URL handle,3,Name,Everyday Tee,everyday-tee,handle of the product's first row
+3,Option1 value,3,Size,M,M,copy
+3,Option2 value,3,Colour,Navy,Navy,copy
+3,SKU,3,SKU,000102,000102,copy
+3,Price,3,Price,"19,95",19.95,"number (Decimal, dot decimal, digits kept)"
+4,URL handle,4,Name,Everyday Hoodie,everyday-hoodie,"slug (lowercase ASCII letters, digits and hyphens)"
+4,Title,4,Name,Everyday Hoodie,Everyday Hoodie,copy
+4,Status,,,,draft,constant from mapping
+4,Option1 name,,,,Size,option name from mapping
+4,Option1 value,4,Size,S,S,copy
+4,Option2 name,,,,Colour,option name from mapping
+4,Option2 value,4,Colour,Grey,Grey,copy
+4,SKU,4,SKU,000201,000201,copy
+4,Price,4,Price,"49,50",49.50,"number (Decimal, dot decimal, digits kept)"
+5,URL handle,5,Name,Everyday Hoodie,everyday-hoodie,handle of the product's first row
+5,Option1 value,5,Size,M,M,copy
+5,Option2 value,5,Colour,Grey,Grey,copy
+5,SKU,5,SKU,000202,000202,copy
+5,Price,5,Price,"49,50",49.50,"number (Decimal, dot decimal, digits kept)"
