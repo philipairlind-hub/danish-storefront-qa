@@ -9,6 +9,7 @@ Independent ecommerce QA utilities and fixed-scope services by Philip Lind, Aarh
 | Free Danish storefront text scan | [Open scanner](https://philipairlind-hub.github.io/danish-storefront-qa/) | One publicly available page; candidate English/Swedish remnants and missing translation strings |
 | Danish Shopify launch checklist | [Read 12-point checklist](https://philipairlind-hub.github.io/danish-storefront-qa/checklist/) | Manual pre-launch review of language, pricing, theme strings, checkout and emails |
 | Supplier spreadsheet import guide | [Read 10-point checklist](https://philipairlind-hub.github.io/danish-storefront-qa/supplier-file-qa/) | New-product import preparation, variants, SKUs, prices and exceptions |
+| SupplierPreflight synthetic delivery demo | [Inspect the full 10-row conversion](https://philipairlind-hub.github.io/danish-storefront-qa/supplier-file-qa/demo/) | Invented supplier input, real mapped CSV output, held exceptions, cell lineage, QA report, downloadable ZIP. Not a client case or live Shopify import | 
 | Supplier CSV Quick Check | [Check a CSV locally](https://philipairlind-hub.github.io/danish-storefront-qa/csv-check/) | Free client-side CSV structure check; no upload, account or analytics. Maximum 3 MiB and 10,000 data records |
 | HVAC estimate follow-up review checklist | [Read 7-step review process](https://philipairlind-hub.github.io/danish-storefront-qa/hvac-estimate-follow-up-checklist/) | Human-led CSV review checks and synthetic example; separate from the paid offline quote tool |
 
@@ -36,7 +37,7 @@ Written questions: shopairlind@gmail.com. Don't send confidential source or cust
 - \`test/\`: Danish page-scanner test suite; historical project documentation reported 14 checks.
 - \`docs/\`: requirements, QA notes and synthetic example documentation. Some documents are historical, not proof of orders.
 
-[Public sitemap, 6 verified URLs](https://philipairlind-hub.github.io/danish-storefront-qa/sitemap.xml). Update both source and public GitHub branches when editing the website, then independently verify the live page.
+[Public sitemap, 7 URLs](https://philipairlind-hub.github.io/danish-storefront-qa/sitemap.xml). Update both source and public GitHub branches when editing the website, then independently verify the live page.
 
 ## Limits and verification (11 November 2026)
 
